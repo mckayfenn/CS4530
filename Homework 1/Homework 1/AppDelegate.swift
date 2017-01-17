@@ -25,6 +25,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         lightSwitch.frame = CGRect(x: 50.0, y: 30.0, width: 100.0, height: 40.0)
         window?.rootViewController?.view.addSubview(lightSwitch)
         
+        //Hopefully this works good
+        //Testing remote connection
+        
         return true
     }
 
