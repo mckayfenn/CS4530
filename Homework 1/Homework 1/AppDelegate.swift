@@ -13,6 +13,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
+    // Set up all Sliders and Labels as optionals
     var _X: UILabel?
     var _Y: UILabel?
     var _XValue: UILabel?
@@ -75,12 +76,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
-    
+    /* Method to calculate and update labels when a slider is changed */
     func sliderChanged()
     {
         let x = _XSlider!.value
         let y = _YSlider!.value
-        
         
         // Update slider values
         _XValue!.text = String(format: "%.3f", x)
@@ -89,7 +89,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Do calculations
         let xPlusy = x + y
         let xMulty = x * y
-        
         
         // Update calculations
         _XPlusY!.text = "X + Y: " + String(format: "%.3f", xPlusy)
