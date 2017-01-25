@@ -15,7 +15,9 @@ class VectorView: UIView {
         super.init(frame: frame)
     }
     
-    //override init?(coder aDecoder)
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func draw(_ rect: CGRect) {
         let context: CGContext = UIGraphicsGetCurrentContext()!
