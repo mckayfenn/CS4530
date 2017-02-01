@@ -13,7 +13,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    private var _knobView: KnobView? = nil
+    private var _colorChooser: ColorChooserView? = nil
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
@@ -26,17 +26,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //vectorView.backgroundColor = UIColor.lightGray
         //window?.rootViewController?.view.addSubview(vectorView)
         
-        _knobView = KnobView()
-        _knobView?.frame = CGRect(x: 10.0, y: 20.0, width: 300.0, height: 400.0)
-        _knobView?.backgroundColor = UIColor.green
-        _knobView?.addTarget(self, action: #selector(knobChanged), for: UIControlEvents.valueChanged)
-        window?.rootViewController?.view.addSubview(_knobView!)
+        _colorChooser = ColorChooserView(frame: UIScreen.main.bounds) // or frame:   window?.bounds    be the size of the screen, only makes sense right here
+        window?.rootViewController?.view.addSubview(_colorChooser!)
         
+        _colorChooser?.knobViewRed?.addTarget(self, action: #selector(knobChanged), for: UIControlEvents.valueChanged)
+        _colorChooser?.knobViewGreen?.addTarget(self, action: #selector(knobChanged), for: UIControlEvents.valueChanged)
+        _colorChooser?.knobViewBlue?.addTarget(self, action: #selector(knobChanged), for: UIControlEvents.valueChanged)
+                
         return true
     }
     
     func knobChanged() {
-        NSLog("Changed to: \(_knobView!.angle)")
+        //NSLog("Changed to: \(_knobView!.angle)")
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

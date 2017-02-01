@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0A4128611E3964C400FC5B86 /* KnobView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4128601E3964C400FC5B86 /* KnobView.swift */; };
 		0A4D86DB1E36C5810089C7AE /* VectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4D86DA1E36C5810089C7AE /* VectorView.swift */; };
+		0A6B87291E42A04400B659F9 /* ColorChooserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6B87281E42A04400B659F9 /* ColorChooserView.swift */; };
 		0AA3EC4B1E302A09009BAC3A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA3EC4A1E302A09009BAC3A /* AppDelegate.swift */; };
 		0AA3EC4D1E302A09009BAC3A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA3EC4C1E302A09009BAC3A /* ViewController.swift */; };
 		0AA3EC521E302A0A009BAC3A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0AA3EC511E302A0A009BAC3A /* Assets.xcassets */; };
@@ -18,6 +19,7 @@
 /* Begin PBXFileReference section */
 		0A4128601E3964C400FC5B86 /* KnobView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KnobView.swift; sourceTree = "<group>"; };
 		0A4D86DA1E36C5810089C7AE /* VectorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VectorView.swift; sourceTree = "<group>"; };
+		0A6B87281E42A04400B659F9 /* ColorChooserView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorChooserView.swift; sourceTree = "<group>"; };
 		0AA3EC471E302A09009BAC3A /* Arrows.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Arrows.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0AA3EC4A1E302A09009BAC3A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0AA3EC4C1E302A09009BAC3A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -63,6 +65,7 @@
 				0AA3EC5C1E302AF3009BAC3A /* Vector.swift */,
 				0A4D86DA1E36C5810089C7AE /* VectorView.swift */,
 				0A4128601E3964C400FC5B86 /* KnobView.swift */,
+				0A6B87281E42A04400B659F9 /* ColorChooserView.swift */,
 			);
 			path = Arrows;
 			sourceTree = "<group>";
@@ -139,6 +142,7 @@
 			files = (
 				0AA3EC4D1E302A09009BAC3A /* ViewController.swift in Sources */,
 				0A4128611E3964C400FC5B86 /* KnobView.swift in Sources */,
+				0A6B87291E42A04400B659F9 /* ColorChooserView.swift in Sources */,
 				0A4D86DB1E36C5810089C7AE /* VectorView.swift in Sources */,
 				0AA3EC5D1E302AF3009BAC3A /* Vector.swift in Sources */,
 				0AA3EC4B1E302A09009BAC3A /* AppDelegate.swift in Sources */,
