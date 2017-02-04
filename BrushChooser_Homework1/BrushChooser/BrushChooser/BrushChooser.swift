@@ -12,21 +12,39 @@ import UIKit
 class BrushChooser: UIView {
     
     private var _colorWheel: ColorWheelView? = nil
-//    private var _strokeEndCap: StrokeEndCapView? = nil
-//    private var _strokeWidth: StrokeWidthView? = nil
-//    private var _strokeJoin: StrokeJoinView? = nil
-//    private var _brushPreview: BrushPreviewView? = nil
+    private var _strokeEndCap: StrokeEndCapView? = nil
+    private var _strokeWidth: StrokeWidthView? = nil
+    private var _strokeJoin: StrokeJoinView? = nil
+    private var _brushPreview: BrushPreviewView? = nil
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         // Construct all the subviews
         _colorWheel = ColorWheelView()
-        _colorWheel?.frame = CGRect(x: 10.0, y: 20.0, width: 300.0, height: 300.0)
+        _colorWheel?.frame = CGRect(x: 10.0, y: 10.0, width: 300.0, height: 300.0)
         _colorWheel?.backgroundColor = UIColor.white
         addSubview(_colorWheel!)
         
+        _strokeEndCap = StrokeEndCapView()
+        _strokeEndCap?.frame = CGRect(x: 10.0, y: 300.0, width: bounds.size.width, height: 50.0)
+        _strokeEndCap?.backgroundColor = UIColor.blue
+        addSubview(_strokeEndCap!)
         
+        _strokeWidth = StrokeWidthView()
+        _strokeWidth?.frame = CGRect(x: 10.0, y: 325.0, width: bounds.size.width, height: 50.0)
+        _strokeWidth?.backgroundColor = UIColor.green
+        addSubview(_strokeWidth!)
+        
+        _strokeJoin = StrokeJoinView()
+        _strokeJoin?.frame = CGRect(x: 10.0, y: 350.0, width: bounds.size.width, height: 50.0)
+        _strokeJoin?.backgroundColor = UIColor.brown
+        addSubview(_strokeJoin!)
+        
+        _brushPreview = BrushPreviewView()
+        _brushPreview?.frame = CGRect(x: 10.0, y: 400.0, width: bounds.size.width, height: 50.0)
+        _brushPreview?.backgroundColor = UIColor.white
+        addSubview(_brushPreview!)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -39,7 +57,17 @@ class BrushChooser: UIView {
         super.layoutSubviews() // call the superclasses implementaition, plays nicely with other layouts
         
         // TODO: Assign frames to each subview
+        
+        
         var r: CGRect = bounds
-        (_colorWheel!.frame, r) = r.divided(atDistance: r.width, from: .minXEdge)
+        (_colorWheel!.frame, r) = r.divided(atDistance: r.height * 0.6, from: .minYEdge)
+        
+        (_strokeEndCap!.frame, r) = r.divided(atDistance: r.height * 0.3, from: .minYEdge)
+        
+        (_strokeWidth!.frame, r) = r.divided(atDistance: r.height * 0.3, from: .minYEdge)
+        
+        (_strokeJoin!.frame, r) = r.divided(atDistance: r.height * 0.5, from: .minYEdge)
+        
+        (_brushPreview!.frame, r) = r.divided(atDistance: r.height, from: .minYEdge)
     }
 }

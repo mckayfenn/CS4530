@@ -14,7 +14,7 @@ class ColorWheelView: UIControl {
     
     override func draw(_ rect: CGRect) {
         // TODO: What if bounds.size.width is > bounds.size.height
-        _wheelRect = CGRect(x: 0.0, y: 0.0, width: bounds.size.width, height: bounds.size.height / 1.5)
+        _wheelRect = CGRect(x: 0.0, y: 0.0, width: bounds.size.width, height: bounds.size.height)
         
         let context: CGContext = UIGraphicsGetCurrentContext()!
         context.setFillColor(UIColor.lightGray.cgColor)
@@ -22,6 +22,7 @@ class ColorWheelView: UIControl {
         context.drawPath(using: .fill)
         
         var nibRect: CGRect = CGRect(x: 0.0, y: _wheelRect.size.height / 2.0, width: _wheelRect.width / 10.0, height: _wheelRect.height / 10.0)
+        
         
         nibRect.origin.x = _wheelRect.midX + (_wheelRect.width * 0.4) * cos(angle) - nibRect.width / 2.0
         nibRect.origin.y = _wheelRect.midY + (_wheelRect.width * 0.4) * sin(angle) - nibRect.height / 2.0
