@@ -26,7 +26,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //vectorView.backgroundColor = UIColor.lightGray
         //window?.rootViewController?.view.addSubview(vectorView)
         
+        
         _colorChooser = ColorChooserView(frame: UIScreen.main.bounds) // or frame:   window?.bounds    be the size of the screen, only makes sense right here
+        _colorChooser?.autoresizingMask = [UIViewAutoresizing.flexibleWidth, UIViewAutoresizing.flexibleHeight]
         window?.rootViewController?.view.addSubview(_colorChooser!)
         
         _colorChooser?.knobViewRed?.addTarget(self, action: #selector(knobChanged), for: UIControlEvents.valueChanged)
