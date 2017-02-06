@@ -12,26 +12,27 @@ class StrokeEndCapView: UIControl {
     private var _endCap: CGRect = CGRect.zero
     
     override func draw(_ rect: CGRect) {
-        _endCap = CGRect(x: 0.0, y: 300.0, width: bounds.size.width, height: bounds.size.height)
+        _endCap = CGRect(x: bounds.midX, y: bounds.midY, width: bounds.size.width, height: bounds.size.height)
         
         let context: CGContext = UIGraphicsGetCurrentContext()!
         
-        context.move(to: CGPoint(x: 0.0, y: 0.0))
-        context.addLine(to: CGPoint(x: 10.0, y: 0.0))
+        context.move(to: CGPoint(x: bounds.minX + 20.0, y: bounds.midY))
+        context.addLine(to: CGPoint(x: bounds.minX + 50.0, y: bounds.midY))
         context.setLineCap(.butt)
         UIColor.red.setStroke()
+        context.setLineWidth(10.0)
         context.drawPath(using: .fillStroke)
         
-        // trying a different way to draw
-        let aPath = UIBezierPath()
-        aPath.move(to: CGPoint(x: 10.0, y: 300.0))
-        aPath.addLine(to: CGPoint(x: 30.0, y: 300.0))
+
+        context.move(to: CGPoint(x: (bounds.midX) - 15.0, y: bounds.midY))
+        context.addLine(to: CGPoint(x: (bounds.midX) + 25.0, y: bounds.midY))
+        context.setLineCap(.round)
+        context.drawPath(using: .fillStroke)
         
-        aPath.close()
-        
-        UIColor.red.set()
-        aPath.stroke()
-        aPath.fill()
+        context.move(to: CGPoint(x: bounds.maxX - 50.0, y: bounds.midY))
+        context.addLine(to: CGPoint(x: bounds.maxX - 20.0, y: bounds.midY))
+        context.setLineCap(.square)
+        context.drawPath(using: .fillStroke)
     }
 }
 

@@ -62,7 +62,7 @@ class BrushChooser: UIView {
         var r: CGRect = bounds
         (_colorWheel!.frame, r) = r.divided(atDistance: r.height * 0.6, from: .minYEdge)
         
-        (_strokeEndCap!.frame, r) = r.divided(atDistance: r.height * 0.3, from: .minYEdge)
+        (_strokeEndCap!.frame, r) = r.divided(atDistance: r.height * 0.25, from: .minYEdge)
         
         (_strokeWidth!.frame, r) = r.divided(atDistance: r.height * 0.3, from: .minYEdge)
         
