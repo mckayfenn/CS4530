@@ -13,26 +13,84 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
-    private var _colorChooser: BrushChooser? = nil
+    private var _brushChooser: BrushChooser? = nil
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         window = UIWindow()
         window?.rootViewController = ViewController()
         window?.makeKeyAndVisible()
         
-        _colorChooser = BrushChooser(frame: UIScreen.main.bounds)
-        window?.rootViewController?.view.addSubview(_colorChooser!)
+        _brushChooser = BrushChooser(frame: UIScreen.main.bounds)
+        window?.rootViewController?.view.addSubview(_brushChooser!)
         
-        _colorChooser?.colorWheel?.addTarget(self, action: #selector(knobChanged), for: UIControlEvents.valueChanged)
+        _brushChooser?.colorWheel?.addTarget(self, action: #selector(knobChanged), for: UIControlEvents.valueChanged)
         
+        _brushChooser?.endCap?.addTarget(self, action: #selector(buttButton), for: UIControlEvents.touchDown)
         
+        _brushChooser?.strokeWidth?.widthSlider.addTarget(self, action: #selector(widthChanged), for: UIControlEvents.valueChanged)
         
-        
+        _brushChooser?.strokeJoin?.addTarget(self, action: #selector(joinSelected), for: UIControlEvents.touchDown)
         return true
     }
     
     func knobChanged() {
-        //NSLog("Changed to: \(!.angle)")
+        //NSLog("Changed to: \(_brushChooser?.colorWheel?.angle)")
+        _brushChooser?.preview?.color = (_brushChooser?.colorWheel?.color)!
+    }
+    
+    func buttButton() {
+        //NSLog(".butt selected in app delegate")
+        let point = Float((_brushChooser?.endCap?.touchPoint.x)!)
+        let buttX = Float((_brushChooser?.endCap?.buttButton?.maxX)!)
+        let roundX = Float((_brushChooser?.endCap?.roundButton?.maxX)!)
+        let squareX = Float((_brushChooser?.endCap?.squareButton?.maxX)!)
+        
+        if (point < buttX)
+        {
+            NSLog(".butt selected")
+            _brushChooser?.preview?.capState = CGLineCap.butt
+        }
+        else if (point < roundX)
+        {
+            NSLog(".round selected")
+            _brushChooser?.preview?.capState = CGLineCap.round
+        }
+        else if (point < squareX)
+        {
+            NSLog(".square selected")
+            _brushChooser?.preview?.capState = CGLineCap.square
+        }
+        
+    }
+    
+    func joinSelected()
+    {
+        let point = Float((_brushChooser?.strokeJoin?.touchPoint.x)!)
+        let miterX = Float((_brushChooser?.strokeJoin?.miterJoin?.maxX)!)
+        let roundX = Float((_brushChooser?.strokeJoin?.roundJoin?.maxX)!)
+        let bevelX = Float((_brushChooser?.strokeJoin?.bevelJoin?.maxX)!)
+        
+        if (point < miterX)
+        {
+            NSLog(".miterJoin selected")
+            _brushChooser?.preview?.joinState = CGLineJoin.miter
+        }
+        else if (point < roundX)
+        {
+            NSLog(".roundJoin selected")
+            _brushChooser?.preview?.joinState = CGLineJoin.round
+        }
+        else if (point < bevelX)
+        {
+            NSLog(".bevelJoin selected")
+            _brushChooser?.preview?.joinState = CGLineJoin.bevel
+        }
+    }
+    
+    func widthChanged()
+    {
+        NSLog("Width changed")
+        _brushChooser?.preview?.width = CGFloat((_brushChooser?.strokeWidth?.widthSlider.value)!)
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

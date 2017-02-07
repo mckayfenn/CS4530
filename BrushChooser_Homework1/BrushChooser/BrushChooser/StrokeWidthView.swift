@@ -8,12 +8,22 @@
 
 import UIKit
 
-class StrokeWidthView: UIControl {
-    private var _width: UISlider?
+class StrokeWidthView: UIView {
+    private var _widthSlider: UISlider = UISlider()
     
-    override func draw(_ rect: CGRect) {
-        _width = UISlider(frame: CGRect(x: 10.0, y: 250.0, width: bounds.size.width / 0.9, height: 20.0))
-        _width!.minimumValue = 0.5
-        _width!.maximumValue = 50.0
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        _widthSlider = UISlider(frame: CGRect(x: bounds.minX , y: bounds.minY, width: 300.0, height: 50.0))
+        _widthSlider.minimumValue = 0.5
+        _widthSlider.maximumValue = 50.0
+        
+        addSubview(_widthSlider)
     }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    var widthSlider: UISlider { return _widthSlider }
+    
 }

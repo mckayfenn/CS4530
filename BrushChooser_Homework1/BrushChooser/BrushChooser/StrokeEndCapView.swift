@@ -9,31 +9,69 @@
 import UIKit
 
 class StrokeEndCapView: UIControl {
-    private var _endCap: CGRect = CGRect.zero
+    
+    private var _buttButton: CGRect = CGRect.zero
+    private var _roundButton: CGRect = CGRect.zero
+    private var _squareButton: CGRect = CGRect.zero
+    
+    private var _touchPoint: CGPoint = CGPoint.zero
+    
     
     override func draw(_ rect: CGRect) {
-        _endCap = CGRect(x: bounds.midX, y: bounds.midY, width: bounds.size.width, height: bounds.size.height)
+        
+        
+        _buttButton = CGRect(x: 0.0, y: 0.0, width: bounds.width / 3, height: bounds.height)
+        _roundButton = CGRect(x: bounds.midX - bounds.width / 6, y: 0.0, width: bounds.width / 3, height: bounds.height)
+        _squareButton = CGRect(x: bounds.maxX - bounds.width / 3, y: 0.0, width: bounds.width / 3, height: bounds.height)
+        
+        
+        
+        
+        //_buttButton.addTarget(self, action: #selector(buttSelected), for: UIControlEvents.touchDown)
         
         let context: CGContext = UIGraphicsGetCurrentContext()!
         
-        context.move(to: CGPoint(x: bounds.minX + 20.0, y: bounds.midY))
-        context.addLine(to: CGPoint(x: bounds.minX + 50.0, y: bounds.midY))
+        
+        // draw line for .butt
+        context.move(to: CGPoint(x: _buttButton.midX - 25.0, y: _buttButton.midY))
+        context.addLine(to: CGPoint(x: _buttButton.midX + 25.0, y: _buttButton.midY))
         context.setLineCap(.butt)
-        UIColor.red.setStroke()
+        UIColor.white.setStroke()
         context.setLineWidth(10.0)
         context.drawPath(using: .fillStroke)
         
-
-        context.move(to: CGPoint(x: (bounds.midX) - 15.0, y: bounds.midY))
-        context.addLine(to: CGPoint(x: (bounds.midX) + 25.0, y: bounds.midY))
+        // draw line for .round
+        context.move(to: CGPoint(x: _roundButton.midX - 25.0, y: bounds.midY))
+        context.addLine(to: CGPoint(x: _roundButton.midX + 25.0, y: bounds.midY))
         context.setLineCap(.round)
         context.drawPath(using: .fillStroke)
         
-        context.move(to: CGPoint(x: bounds.maxX - 50.0, y: bounds.midY))
-        context.addLine(to: CGPoint(x: bounds.maxX - 20.0, y: bounds.midY))
+        // draw line for .square
+        context.move(to: CGPoint(x: _squareButton.midX - 25.0, y: bounds.midY))
+        context.addLine(to: CGPoint(x: _squareButton.midX + 25.0, y: bounds.midY))
         context.setLineCap(.square)
         context.drawPath(using: .fillStroke)
+        
+        
     }
+    
+    
+    
+    func buttSelected() {
+            NSLog(".butt was selected in stroke view")
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let touch: UITouch = touches.first!
+        _touchPoint = touch.location(in: self)
+        
+        sendActions(for: .touchDown)
+    }
+    
+    var touchPoint: CGPoint { return _touchPoint }
+    var buttButton: CGRect? { return _buttButton }
+    var roundButton: CGRect? { return _roundButton }
+    var squareButton: CGRect? { return _squareButton }
 }
 
 

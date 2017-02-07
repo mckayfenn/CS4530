@@ -9,7 +9,7 @@
 import UIKit
 
 /// BrushChooser is the whole overall view
-class BrushChooser: UIView {
+class BrushChooser: UIControl {
     
     private var _colorWheel: ColorWheelView? = nil
     private var _strokeEndCap: StrokeEndCapView? = nil
@@ -22,28 +22,23 @@ class BrushChooser: UIView {
         
         // Construct all the subviews
         _colorWheel = ColorWheelView()
-        _colorWheel?.frame = CGRect(x: 10.0, y: 10.0, width: 300.0, height: 300.0)
-        _colorWheel?.backgroundColor = UIColor.white
+        _colorWheel?.frame = CGRect(x: 10.0, y: 10.0, width: 250.0, height: 250.0)
         addSubview(_colorWheel!)
         
         _strokeEndCap = StrokeEndCapView()
         _strokeEndCap?.frame = CGRect(x: 10.0, y: 300.0, width: bounds.size.width, height: 50.0)
-        _strokeEndCap?.backgroundColor = UIColor.blue
         addSubview(_strokeEndCap!)
         
         _strokeWidth = StrokeWidthView()
         _strokeWidth?.frame = CGRect(x: 10.0, y: 325.0, width: bounds.size.width, height: 50.0)
-        _strokeWidth?.backgroundColor = UIColor.green
         addSubview(_strokeWidth!)
         
         _strokeJoin = StrokeJoinView()
         _strokeJoin?.frame = CGRect(x: 10.0, y: 350.0, width: bounds.size.width, height: 50.0)
-        _strokeJoin?.backgroundColor = UIColor.brown
         addSubview(_strokeJoin!)
         
         _brushPreview = BrushPreviewView()
         _brushPreview?.frame = CGRect(x: 10.0, y: 400.0, width: bounds.size.width, height: 50.0)
-        _brushPreview?.backgroundColor = UIColor.white
         addSubview(_brushPreview!)
     }
     
@@ -51,7 +46,7 @@ class BrushChooser: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    var colorWheel: ColorWheelView? { return _colorWheel }
+    
     
     override func layoutSubviews() {
         super.layoutSubviews() // call the superclasses implementaition, plays nicely with other layouts
@@ -64,10 +59,17 @@ class BrushChooser: UIView {
         
         (_strokeEndCap!.frame, r) = r.divided(atDistance: r.height * 0.25, from: .minYEdge)
         
-        (_strokeWidth!.frame, r) = r.divided(atDistance: r.height * 0.3, from: .minYEdge)
+        (_strokeJoin!.frame, r) = r.divided(atDistance: r.height * 0.35, from: .minYEdge)
         
-        (_strokeJoin!.frame, r) = r.divided(atDistance: r.height * 0.5, from: .minYEdge)
+        (_strokeWidth!.frame, r) = r.divided(atDistance: r.height * 0.5, from: .minYEdge)
         
         (_brushPreview!.frame, r) = r.divided(atDistance: r.height, from: .minYEdge)
     }
+    
+    var buttButton: CGRect { return (_strokeEndCap?.buttButton)! }
+    var colorWheel: ColorWheelView? { return _colorWheel }
+    var endCap: StrokeEndCapView? { return _strokeEndCap }
+    var strokeWidth: StrokeWidthView? { return _strokeWidth }
+    var strokeJoin: StrokeJoinView? { return _strokeJoin }
+    var preview: BrushPreviewView? { return _brushPreview }
 }
