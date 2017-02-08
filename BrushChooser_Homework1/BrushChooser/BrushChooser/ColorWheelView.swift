@@ -16,7 +16,11 @@ class ColorWheelView: UIControl {
     
     private var _color: UIColor = UIColor.white
     
+    private var _nib: NibView? = nil
+    
     override func draw(_ rect: CGRect) {
+        _nib = NibView()
+        
         // TODO: What if bounds.size.width is > bounds.size.height
         _wheelRect = CGRect(x: 52.0, y: 50.0, width: bounds.size.width / 1.5, height: bounds.size.height / 1.5)
         
@@ -60,9 +64,13 @@ class ColorWheelView: UIControl {
         context.addEllipse(in: nibRect)
         
         context.drawPath(using: .fillStroke)
+        _nib?.color = _color
+        _nib?.changeOX(xPos: _wheelRect.midX + (_touchPoint.x) - (_nib?.width)! / 2.0)
+        _nib?.changeOY(yPos: _wheelRect.midY + (_touchPoint.y) - (_nib?.height)! / 2.0)
+        addSubview(_nib!) // not actually working
     }
     
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         let touch: UITouch = touches.first!
         _touchPoint = touch.location(in: self)
         

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A5DCE8B1E4AB8C900DB4C6F /* NibView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5DCE8A1E4AB8C900DB4C6F /* NibView.swift */; };
 		0A856E091E454E0A00C62D18 /* StrokeEndCapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A856E081E454E0A00C62D18 /* StrokeEndCapView.swift */; };
 		0A856E0B1E45555100C62D18 /* StrokeWidthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A856E0A1E45555100C62D18 /* StrokeWidthView.swift */; };
 		0A856E0D1E45576C00C62D18 /* StrokeJoinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A856E0C1E45576C00C62D18 /* StrokeJoinView.swift */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0A5DCE8A1E4AB8C900DB4C6F /* NibView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NibView.swift; sourceTree = "<group>"; };
 		0A856E081E454E0A00C62D18 /* StrokeEndCapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StrokeEndCapView.swift; sourceTree = "<group>"; };
 		0A856E0A1E45555100C62D18 /* StrokeWidthView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StrokeWidthView.swift; sourceTree = "<group>"; };
 		0A856E0C1E45576C00C62D18 /* StrokeJoinView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StrokeJoinView.swift; sourceTree = "<group>"; };
@@ -72,6 +74,7 @@
 				0A856E0A1E45555100C62D18 /* StrokeWidthView.swift */,
 				0A856E0C1E45576C00C62D18 /* StrokeJoinView.swift */,
 				0A856E0E1E45591300C62D18 /* BrushPreviewView.swift */,
+				0A5DCE8A1E4AB8C900DB4C6F /* NibView.swift */,
 			);
 			path = BrushChooser;
 			sourceTree = "<group>";
@@ -151,6 +154,7 @@
 				0A856E0F1E45591300C62D18 /* BrushPreviewView.swift in Sources */,
 				0AEDD0B01E452BB800285D46 /* AppDelegate.swift in Sources */,
 				0AEDD0C21E452C7000285D46 /* BrushChooser.swift in Sources */,
+				0A5DCE8B1E4AB8C900DB4C6F /* NibView.swift in Sources */,
 				0AEDD0C41E452D8300285D46 /* ColorWheelView.swift in Sources */,
 				0A856E091E454E0A00C62D18 /* StrokeEndCapView.swift in Sources */,
 				0A856E0B1E45555100C62D18 /* StrokeWidthView.swift in Sources */,
