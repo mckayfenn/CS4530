@@ -30,6 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         _brushChooser?.strokeWidth?.widthSlider.addTarget(self, action: #selector(widthChanged), for: UIControlEvents.valueChanged)
         
         _brushChooser?.strokeJoin?.addTarget(self, action: #selector(joinSelected), for: UIControlEvents.touchDown)
+        
         return true
     }
     
@@ -47,18 +48,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if (point < buttX)
         {
-            NSLog(".butt selected")
+            //NSLog(".butt selected")
             _brushChooser?.preview?.capState = CGLineCap.butt
+            _brushChooser?.endCap?.buttSelected()
         }
         else if (point < roundX)
         {
-            NSLog(".round selected")
+            //NSLog(".round selected")
             _brushChooser?.preview?.capState = CGLineCap.round
+            _brushChooser?.endCap?.roundSelected()
         }
         else if (point < squareX)
         {
-            NSLog(".square selected")
+            //NSLog(".square selected")
             _brushChooser?.preview?.capState = CGLineCap.square
+            _brushChooser?.endCap?.squareSelected()
         }
         
     }
@@ -72,24 +76,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if (point < miterX)
         {
-            NSLog(".miterJoin selected")
+            //NSLog(".miterJoin selected")
             _brushChooser?.preview?.joinState = CGLineJoin.miter
+            _brushChooser?.strokeJoin?.miterSelected()
         }
         else if (point < roundX)
         {
-            NSLog(".roundJoin selected")
+            //NSLog(".roundJoin selected")
             _brushChooser?.preview?.joinState = CGLineJoin.round
+            _brushChooser?.strokeJoin?.roundSelected()
         }
         else if (point < bevelX)
         {
-            NSLog(".bevelJoin selected")
+            //NSLog(".bevelJoin selected")
             _brushChooser?.preview?.joinState = CGLineJoin.bevel
+            _brushChooser?.strokeJoin?.bevelSelected()
         }
     }
     
     func widthChanged()
     {
-        NSLog("Width changed")
+        //NSLog("Width changed")
         _brushChooser?.preview?.width = CGFloat((_brushChooser?.strokeWidth?.widthSlider.value)!)
     }
 

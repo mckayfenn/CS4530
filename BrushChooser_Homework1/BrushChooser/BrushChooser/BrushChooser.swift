@@ -22,7 +22,7 @@ class BrushChooser: UIControl {
         
         // Construct all the subviews
         _colorWheel = ColorWheelView()
-        _colorWheel?.frame = CGRect(x: 10.0, y: 10.0, width: 250.0, height: 250.0)
+        _colorWheel?.frame = CGRect(x: 10.0, y: 10.0, width: 300.0, height: 300.0)
         addSubview(_colorWheel!)
         
         _strokeEndCap = StrokeEndCapView()

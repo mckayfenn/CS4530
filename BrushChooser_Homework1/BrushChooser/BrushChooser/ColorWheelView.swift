@@ -18,21 +18,21 @@ class ColorWheelView: UIControl {
     
     override func draw(_ rect: CGRect) {
         // TODO: What if bounds.size.width is > bounds.size.height
-        _wheelRect = CGRect(x: 0.0, y: 0.0, width: bounds.size.width, height: bounds.size.height)
+        _wheelRect = CGRect(x: 52.0, y: 50.0, width: bounds.size.width / 1.5, height: bounds.size.height / 1.5)
         
         let context: CGContext = UIGraphicsGetCurrentContext()!
         //context.setFillColor(UIColor.lightGray.cgColor)
-        context.addEllipse(in: _wheelRect)
+        //context.addEllipse(in: _wheelRect)
         //context.drawPath(using: .fill)
         
-        var nibRect: CGRect = CGRect(x: 0.0, y: _wheelRect.size.height / 2.0, width: _wheelRect.width / 10.0, height: _wheelRect.height / 10.0)
+        var nibRect: CGRect = CGRect(x: 0.0, y: _wheelRect.size.height / 2.0, width: _wheelRect.width / 10.0, height: _wheelRect.height / 8.0)
         
         
         //nibRect.origin.x = _wheelRect.midX + (_wheelRect.width * 0.4) * cos(angle) - nibRect.width / 2.0
         //nibRect.origin.y = _wheelRect.midY + (_wheelRect.width * 0.4) * sin(angle) - nibRect.height / 2.0
         
-        let width: Int = Int(_wheelRect.size.width)
-        let height: Int = Int(_wheelRect.size.height)
+        let width: Int = Int(bounds.size.width)
+        let height: Int = Int(bounds.size.height)
         
         for var x in 0...width
         {
@@ -44,16 +44,22 @@ class ColorWheelView: UIControl {
                 context.drawPath(using: CGPathDrawingMode.eoFillStroke)
             }
         }
-
+        
+        
+        
         nibRect.origin.x = _wheelRect.midX + (_touchPoint.x) - nibRect.width / 2.0
         nibRect.origin.y = _wheelRect.midY + (_touchPoint.y) - nibRect.height / 2.0
         
         _color = colorFromColorWheelWithBoundingRect(rect: _wheelRect, point: CGPoint(x: nibRect.origin.x, y: nibRect.origin.y), brightness: 1.0, alpha: 1.0)
         
+        sendActions(for: .valueChanged)
         
-        context.setFillColor(UIColor.darkGray.cgColor)
+        context.setFillColor(_color.cgColor)
+        context.setStrokeColor(UIColor.darkGray.cgColor)
+        context.setLineWidth(1.5)
         context.addEllipse(in: nibRect)
-        context.drawPath(using: .fill)
+        
+        context.drawPath(using: .fillStroke)
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -65,7 +71,7 @@ class ColorWheelView: UIControl {
         
         angle = atan2((_touchPoint.y), (_touchPoint.x))
         sendActions(for: .valueChanged)
-        
+        setNeedsDisplay()
     }
     
     var angle: CGFloat {
