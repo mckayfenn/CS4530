@@ -55,13 +55,13 @@ class BrushChooser: UIControl {
         
         
         var r: CGRect = bounds
-        (_colorWheel!.frame, r) = r.divided(atDistance: r.height * 0.6, from: .minYEdge)
+        (_colorWheel!.frame, r) = r.divided(atDistance: r.height * 0.5, from: .minYEdge)
         
         (_strokeEndCap!.frame, r) = r.divided(atDistance: r.height * 0.25, from: .minYEdge)
         
-        (_strokeJoin!.frame, r) = r.divided(atDistance: r.height * 0.35, from: .minYEdge)
+        (_strokeJoin!.frame, r) = r.divided(atDistance: r.height * 0.25, from: .minYEdge)
         
-        (_strokeWidth!.frame, r) = r.divided(atDistance: r.height * 0.5, from: .minYEdge)
+        (_strokeWidth!.frame, r) = r.divided(atDistance: r.height * 0.4, from: .minYEdge)
         
         (_brushPreview!.frame, r) = r.divided(atDistance: r.height, from: .minYEdge)
     }

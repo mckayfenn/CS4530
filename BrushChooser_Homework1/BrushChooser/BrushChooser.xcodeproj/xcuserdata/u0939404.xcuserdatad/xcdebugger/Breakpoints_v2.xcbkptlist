@@ -106,11 +106,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BrushChooser/BrushPreviewView.swift"
-            timestampString = "508140414.85136"
+            timestampString = "508207954.561274"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "42"
-            endingLineNumber = "42"
+            startingLineNumber = "46"
+            endingLineNumber = "46"
             landmarkName = "BrushPreviewView"
             landmarkType = "3">
          </BreakpointContent>
