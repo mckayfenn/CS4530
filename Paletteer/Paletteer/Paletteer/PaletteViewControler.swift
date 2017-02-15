@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PaletteViewController: UIViewController, UITableViewDataSource {
+class PaletteViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     // MARK: UIViewController Override Methods
     override func loadView() {
         // TODO: set view property
@@ -22,7 +22,8 @@ class PaletteViewController: UIViewController, UITableViewDataSource {
         // NOTE: view does NOT have a frame yet!!!!!!!
         //colorTableView.autoresizingMask = [UIViewAutoresizing.flexibleWidth, UIViewAutoresizing.flexibleHeight] // bitwise or
         contentView.dataSource = self
-        }
+        contentView.delegate = self
+    }
     
    
     
@@ -49,6 +50,15 @@ class PaletteViewController: UIViewController, UITableViewDataSource {
         return UIColor(hue: CGFloat(Double(index) / 100.0), saturation: 1.0, brightness: 1.0, alpha: 1.0)
     }
 
+    // MARK: - UITableViewDelegate Methods
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let color: UIColor = colorForIndex(indexPath.row)
+        
+        let colorDetailViewController: ColorViewController = ColorViewController()
+        colorDetailViewController.color = color
+        
+        navigationController?.pushViewController(colorDetailViewController, animated: true)
+    }
     
     // MARK: - PaletteViewController Methods
      private var contentView: UITableView! { return view as! UITableView }

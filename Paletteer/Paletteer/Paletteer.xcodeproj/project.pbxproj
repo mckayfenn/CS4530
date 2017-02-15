@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0A7B26A71E5274B4004775CE /* PaletteViewControler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7B26A61E5274B4004775CE /* PaletteViewControler.swift */; };
+		0A8E0CB41E5517C60018CD30 /* ColorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8E0CB31E5517C60018CD30 /* ColorViewController.swift */; };
 		0AF357811E4BD73100015059 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF357801E4BD73100015059 /* AppDelegate.swift */; };
 		0AF357881E4BD73100015059 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0AF357871E4BD73100015059 /* Assets.xcassets */; };
 		0AF357931E4BD86400015059 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AF357921E4BD86400015059 /* Default-568h@2x.png */; };
@@ -15,6 +16,7 @@
 
 /* Begin PBXFileReference section */
 		0A7B26A61E5274B4004775CE /* PaletteViewControler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaletteViewControler.swift; sourceTree = "<group>"; };
+		0A8E0CB31E5517C60018CD30 /* ColorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorViewController.swift; sourceTree = "<group>"; };
 		0AF3577D1E4BD73100015059 /* Paletteer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Paletteer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0AF357801E4BD73100015059 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0AF357871E4BD73100015059 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -55,6 +57,7 @@
 			children = (
 				0AF357801E4BD73100015059 /* AppDelegate.swift */,
 				0A7B26A61E5274B4004775CE /* PaletteViewControler.swift */,
+				0A8E0CB31E5517C60018CD30 /* ColorViewController.swift */,
 				0AF357871E4BD73100015059 /* Assets.xcassets */,
 				0AF3578C1E4BD73100015059 /* Info.plist */,
 			);
@@ -133,6 +136,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0AF357811E4BD73100015059 /* AppDelegate.swift in Sources */,
+				0A8E0CB41E5517C60018CD30 /* ColorViewController.swift in Sources */,
 				0A7B26A71E5274B4004775CE /* PaletteViewControler.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
