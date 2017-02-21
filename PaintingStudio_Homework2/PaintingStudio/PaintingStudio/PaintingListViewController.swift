@@ -20,9 +20,9 @@ class PaintingListViewController: UIViewController, UICollectionViewDataSource, 
     
     // MARK: - UIViewController Overrides
     override func loadView() {
-        let thingsLayout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+        let paintingsListLayout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         
-        view = UICollectionView(frame: CGRect.zero, collectionViewLayout: thingsLayout)
+        view = UICollectionView(frame: CGRect.zero, collectionViewLayout: paintingsListLayout)
     }
     
     override func viewDidLoad() {
@@ -30,6 +30,10 @@ class PaintingListViewController: UIViewController, UICollectionViewDataSource, 
         
         paintingListView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: NSStringFromClass(UICollectionViewCell.self))
         paintingListView.backgroundColor = UIColor.lightGray
+        
+        let addButton = UIBarButtonItem(title: "add", style: .plain, target: self, action: #selector(createPaintingClicked))
+        self.navigationItem.rightBarButtonItem = addButton
+        
         paintingListView.dataSource = self
         paintingListView.delegate = self
     }
@@ -38,6 +42,7 @@ class PaintingListViewController: UIViewController, UICollectionViewDataSource, 
     // MARK: - UICollectionViewDataSource Methods
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
+        NSLog("\(_paintingCollection.paintingCount)")
         // Return the number of items in the data model
         return _paintingCollection.paintingCount
         
@@ -48,14 +53,14 @@ class PaintingListViewController: UIViewController, UICollectionViewDataSource, 
         // Obtain data element based on indexPath
         let painting: Painting = _paintingCollection.paintingWithIndex(paintingIndex: indexPath.item)
         
+        
         // fill in the cell with the painting
         let cell: UICollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: NSStringFromClass(UICollectionViewCell.self), for: indexPath)
-        cell.backgroundColor = UIColor.green
+        cell.backgroundColor = UIColor.white
         
         
         
         let titleLabel: UILabel = cell.contentView.subviews.count == 0 ? UILabel(frame: CGRect(x: 0.0, y: 0.0, width: 50.0, height: 50.0)) : cell.contentView.subviews[0] as! UILabel
-        //titleLabel.backgroundColor = UIColor.orange
         titleLabel.text = "\(painting.strokes.count)"
         cell.contentView.addSubview(titleLabel)
         
@@ -66,18 +71,23 @@ class PaintingListViewController: UIViewController, UICollectionViewDataSource, 
     // MARK: - UICollecitonViewDelegate Methods
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         // Obtain data element based on indexPath
-        let painting: Painting = _paintingCollection.paintingWithIndex(paintingIndex: indexPath.item)
+        //let painting: Painting = _paintingCollection.paintingWithIndex(paintingIndex: indexPath.item)
+        let paintingIndex: Int = indexPath.item
         
+        // Build a view controller and get it the data it needs
+
         let paintViewController: PaintingViewController = PaintingViewController()
-        paintViewController.title = "\(painting.strokes.count)"
+        paintViewController.paintingCollection = _paintingCollection
+        paintViewController.paintingIndex = paintingIndex
         
-        // TODO: Convert between a painting object from the data model and the data structure the painting view uses to store this
-        //painting(painting, toPaintView: PaintingViewController.paintView)
-        //paintViewController.labelView.text = "This painting is ugly! \(painting.strokes.count) that many strokes."
-        paintViewController.painting = painting
         
         
         navigationController?.pushViewController(paintViewController, animated: true)
+    }
+    
+    func createPaintingClicked() {
+        _paintingCollection.createPainting(painting: Painting())
+        paintingListView.reloadData()
     }
     
 //    private func paintingFromPaintView(paintView: PaintView) -> Painting {

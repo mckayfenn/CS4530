@@ -14,15 +14,21 @@ class Painting {
 }
 
 class Stroke {
-    var color: Color = Color
+    var color: Color = Color(r: 255,g: 255,b: 255)
     var points: [Point] = []
     var width: Double = 1.0
 }
 
 class Color {
-    var red: Double = 1.0
-    var green: Double = 1.0
-    var blue: Double = 1.0
+    var red: Double = 255.0
+    var green: Double = 255.0
+    var blue: Double = 255.0
+    
+    init(r: Double, g: Double, b: Double) {
+        red = r
+        green = g
+        blue = b
+    }
 }
 
 class Point {

@@ -22,12 +22,13 @@ class PaintingCollection {
     }
 
     // MARK: - Accessing Paintings
-    func paintingWithIndex(paintingIndex: Int) -> Painting {
-        return _paintings[paintingIndex]
-    }
-    
     func createPainting(painting: Painting) {
         _paintings.append(painting)
+        NSLog("new painting created. \(_paintings.count)")
+    }
+    
+    func paintingWithIndex(paintingIndex: Int) -> Painting {
+        return _paintings[paintingIndex]
     }
     
     func deletePaintingIndex(index: Int) {
