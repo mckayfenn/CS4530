@@ -6,4 +6,16 @@
 //  Copyright © 2017 McKay Fenn. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+class PaintingView {
+    var lines: [PolyLines] = []
+    
+}
+
+class PolyLines {
+    var points: [CGPoint] = []
+    var cap: CGLineCap = .butt
+    var width: CGFloat = 0.0
+    var color: UIColor = UIColor.black
+}

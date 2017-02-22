@@ -54,7 +54,7 @@ class PaintingViewController: UIViewController {
         //painting(painting, toPaintView: PaintingViewController.paintView)
         //paintViewController.labelView.text = "This painting is ugly! \(painting.strokes.count) that many strokes."
         let painting: Painting = _paintingCollection!.paintingWithIndex(paintingIndex: paintingIndex!)
-        labelView.text = "this is a painting with \(painting.strokes.count) strokes."
+        labelView.text = "this is a painting"
     }
     
 //    private func strokeToPolyLine(stroke: Stroke) -> PolyLine {
