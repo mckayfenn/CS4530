@@ -38,7 +38,8 @@ class PaintingViewController: UIViewController {
         //paintView.backgroundColor = UIColor.white
         //paintView.numberOfLines = -1
         
-        let delete: UIBarButtonItem = UIBarButtonItem(title: "Delete", style: .plain, target: self, action: #selector(deletePaintingSelected))
+        //let delete: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: <#T##Selector?#>)
+        let delete: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(deletePaintingSelected))
         let brush: UIBarButtonItem = UIBarButtonItem(title: "Brush", style: .plain, target: self, action: #selector(brushSelected))
         super.navigationItem.rightBarButtonItems = [delete, brush]
     }

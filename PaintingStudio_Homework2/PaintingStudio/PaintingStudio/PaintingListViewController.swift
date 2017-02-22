@@ -21,6 +21,8 @@ class PaintingListViewController: UIViewController, UICollectionViewDataSource, 
     // MARK: - UIViewController Overrides
     override func loadView() {
         let paintingsListLayout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+        paintingsListLayout.itemSize = CGSize(width: 60, height: 80)
+        paintingsListLayout.sectionInset = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
         
         view = UICollectionView(frame: CGRect.zero, collectionViewLayout: paintingsListLayout)
     }
@@ -31,7 +33,7 @@ class PaintingListViewController: UIViewController, UICollectionViewDataSource, 
         paintingListView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: NSStringFromClass(UICollectionViewCell.self))
         paintingListView.backgroundColor = UIColor.lightGray
         
-        let addButton = UIBarButtonItem(title: "Add", style: .plain, target: self, action: #selector(createPaintingClicked))
+        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(createPaintingClicked))
         self.navigationItem.rightBarButtonItem = addButton
         
         paintingListView.dataSource = self
