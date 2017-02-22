@@ -40,11 +40,15 @@ class BrushChooser: UIControl {
         _brushPreview = BrushPreviewView()
         _brushPreview?.frame = CGRect(x: 10.0, y: 400.0, width: bounds.size.width, height: 50.0)
         addSubview(_brushPreview!)
+        
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    
     
     
     

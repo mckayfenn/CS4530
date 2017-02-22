@@ -44,7 +44,7 @@ class PaintingView: UIControl {
 //    var join: CGLineJoin = .round
 //    var width: CGFloat = 0.0
 //    var color: UIColor = UIColor.black
-//    
+//
 //    func addPoint(point: CGPoint) {
 //        points.append(point)
 //    }

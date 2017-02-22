@@ -116,6 +116,11 @@ class PaintingViewController: UIViewController {
         _brushChooser = BrushChooser(frame: UIScreen.main.bounds)
         paintView.addSubview(_brushChooser!)
         
+        super.viewDidLoad()
+        self.navigationItem.hidesBackButton = true
+        let newBackButton = UIBarButtonItem(title: "Back", style: UIBarButtonItemStyle.plain, target: self, action: #selector(PaintingViewController.back(sender:)))
+        self.navigationItem.leftBarButtonItem = newBackButton
+        
         _brushChooser?.colorWheel?.addTarget(self, action: #selector(knobChanged), for: UIControlEvents.valueChanged)
         
         _brushChooser?.endCap?.addTarget(self, action: #selector(buttButton), for: UIControlEvents.touchDown)
@@ -125,9 +130,14 @@ class PaintingViewController: UIViewController {
         _brushChooser?.strokeJoin?.addTarget(self, action: #selector(joinSelected), for: UIControlEvents.touchDown)
     }
     
+    func back(sender: UIBarButtonItem) {
+        _ = navigationController?.popViewController(animated: true)
+    }
+    
     func knobChanged() {
         //NSLog("Changed to: \(_brushChooser?.colorWheel?.angle)")
         _brushChooser?.preview?.color = (_brushChooser?.colorWheel?.color)!
+        paintView.painting.color = (_brushChooser?.colorWheel?.color)!
     }
     
     func buttButton() {
@@ -142,18 +152,21 @@ class PaintingViewController: UIViewController {
             //NSLog(".butt selected")
             _brushChooser?.preview?.capState = CGLineCap.butt
             _brushChooser?.endCap?.buttSelected()
+            paintView.painting.cap = CGLineCap.butt
         }
         else if (point < roundX)
         {
             //NSLog(".round selected")
             _brushChooser?.preview?.capState = CGLineCap.round
             _brushChooser?.endCap?.roundSelected()
+            paintView.painting.cap = CGLineCap.round
         }
         else if (point < squareX)
         {
             //NSLog(".square selected")
             _brushChooser?.preview?.capState = CGLineCap.square
             _brushChooser?.endCap?.squareSelected()
+            paintView.painting.cap = CGLineCap.square
         }
         
     }
@@ -170,18 +183,21 @@ class PaintingViewController: UIViewController {
             //NSLog(".miterJoin selected")
             _brushChooser?.preview?.joinState = CGLineJoin.miter
             _brushChooser?.strokeJoin?.miterSelected()
+            paintView.painting.join = .miter
         }
         else if (point < roundX)
         {
             //NSLog(".roundJoin selected")
             _brushChooser?.preview?.joinState = CGLineJoin.round
             _brushChooser?.strokeJoin?.roundSelected()
+            paintView.painting.join = .round
         }
         else if (point < bevelX)
         {
             //NSLog(".bevelJoin selected")
             _brushChooser?.preview?.joinState = CGLineJoin.bevel
             _brushChooser?.strokeJoin?.bevelSelected()
+            paintView.painting.join = .bevel
         }
     }
     
@@ -189,5 +205,6 @@ class PaintingViewController: UIViewController {
     {
         //NSLog("Width changed")
         _brushChooser?.preview?.width = CGFloat((_brushChooser?.strokeWidth?.widthSlider.value)!)
+        paintView.painting.width = CGFloat((_brushChooser?.strokeWidth?.widthSlider.value)!)
     }
 }

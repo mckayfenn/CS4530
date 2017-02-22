@@ -8,13 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		0A248F7D1E5D3CCA00DE6FB8 /* BrushChooser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A248F7C1E5D3CCA00DE6FB8 /* BrushChooser.swift */; };
-		0A248F7F1E5D3D2100DE6FB8 /* BrushPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A248F7E1E5D3D2100DE6FB8 /* BrushPreviewView.swift */; };
-		0A248F811E5D3D4300DE6FB8 /* ColorWheelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A248F801E5D3D4300DE6FB8 /* ColorWheelView.swift */; };
-		0A248F831E5D3D5D00DE6FB8 /* NibView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A248F821E5D3D5D00DE6FB8 /* NibView.swift */; };
-		0A248F851E5D3D7D00DE6FB8 /* StrokeEndCapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A248F841E5D3D7D00DE6FB8 /* StrokeEndCapView.swift */; };
-		0A248F871E5D3D9D00DE6FB8 /* StrokeJoinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A248F861E5D3D9D00DE6FB8 /* StrokeJoinView.swift */; };
-		0A248F891E5D3DB700DE6FB8 /* StrokeWidthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A248F881E5D3DB700DE6FB8 /* StrokeWidthView.swift */; };
-		0A6E761C1E5D0377000EE6DD /* PaintingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6E761B1E5D0377000EE6DD /* PaintingView.swift */; };
 		0AAD6B1E1E57A83C00491102 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AAD6B1D1E57A83C00491102 /* AppDelegate.swift */; };
 		0AAD6B251E57A83C00491102 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0AAD6B241E57A83C00491102 /* Assets.xcassets */; };
 		0AAD6B301E57A93000491102 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AAD6B2F1E57A93000491102 /* Default-568h@2x.png */; };
@@ -22,17 +15,18 @@
 		0AAD6B341E57B8C000491102 /* PaintingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AAD6B331E57B8C000491102 /* PaintingViewController.swift */; };
 		0AAD6B361E57BD9D00491102 /* PaintingCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AAD6B351E57BD9D00491102 /* PaintingCollection.swift */; };
 		0AAD6B3A1E57C08600491102 /* Painting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AAD6B391E57C08600491102 /* Painting.swift */; };
+		0ABC5AF41E5E0EAA00B0FD6E /* BrushChooserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABC5AF31E5E0EAA00B0FD6E /* BrushChooserController.swift */; };
+		0ABC5AFA1E5E101E00B0FD6E /* PaintingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABC5AF91E5E101E00B0FD6E /* PaintingView.swift */; };
+		0ABC5AFC1E5E104E00B0FD6E /* BrushPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABC5AFB1E5E104E00B0FD6E /* BrushPreviewView.swift */; };
+		0ABC5B041E5E10CB00B0FD6E /* StrokeJoinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABC5B031E5E10CB00B0FD6E /* StrokeJoinView.swift */; };
+		0ABC5B061E5E10ED00B0FD6E /* StrokeWidthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABC5B051E5E10ED00B0FD6E /* StrokeWidthView.swift */; };
+		0ABC5B081E5E112300B0FD6E /* NibView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABC5B071E5E112300B0FD6E /* NibView.swift */; };
+		0ABC5B0A1E5E115400B0FD6E /* ColorWheelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABC5B091E5E115400B0FD6E /* ColorWheelView.swift */; };
+		0ABC5B0C1E5E117A00B0FD6E /* StrokeEndCapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABC5B0B1E5E117A00B0FD6E /* StrokeEndCapView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		0A248F7C1E5D3CCA00DE6FB8 /* BrushChooser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BrushChooser.swift; path = PaintingStudio/BrushChooser.swift; sourceTree = "<group>"; };
-		0A248F7E1E5D3D2100DE6FB8 /* BrushPreviewView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrushPreviewView.swift; sourceTree = "<group>"; };
-		0A248F801E5D3D4300DE6FB8 /* ColorWheelView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorWheelView.swift; sourceTree = "<group>"; };
-		0A248F821E5D3D5D00DE6FB8 /* NibView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NibView.swift; sourceTree = "<group>"; };
-		0A248F841E5D3D7D00DE6FB8 /* StrokeEndCapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StrokeEndCapView.swift; sourceTree = "<group>"; };
-		0A248F861E5D3D9D00DE6FB8 /* StrokeJoinView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StrokeJoinView.swift; sourceTree = "<group>"; };
-		0A248F881E5D3DB700DE6FB8 /* StrokeWidthView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StrokeWidthView.swift; sourceTree = "<group>"; };
-		0A6E761B1E5D0377000EE6DD /* PaintingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaintingView.swift; sourceTree = "<group>"; };
 		0AAD6B1A1E57A83C00491102 /* PaintingStudio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PaintingStudio.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0AAD6B1D1E57A83C00491102 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = PaintingStudio/AppDelegate.swift; sourceTree = "<group>"; };
 		0AAD6B241E57A83C00491102 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = PaintingStudio/Assets.xcassets; sourceTree = "<group>"; };
@@ -42,6 +36,14 @@
 		0AAD6B331E57B8C000491102 /* PaintingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PaintingViewController.swift; path = PaintingStudio/PaintingViewController.swift; sourceTree = "<group>"; };
 		0AAD6B351E57BD9D00491102 /* PaintingCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaintingCollection.swift; sourceTree = "<group>"; };
 		0AAD6B391E57C08600491102 /* Painting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Painting.swift; sourceTree = "<group>"; };
+		0ABC5AF31E5E0EAA00B0FD6E /* BrushChooserController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BrushChooserController.swift; path = PaintingStudio/BrushChooserController.swift; sourceTree = "<group>"; };
+		0ABC5AF91E5E101E00B0FD6E /* PaintingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PaintingView.swift; path = PaintingStudio/PaintingView.swift; sourceTree = "<group>"; };
+		0ABC5AFB1E5E104E00B0FD6E /* BrushPreviewView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BrushPreviewView.swift; path = PaintingStudio/BrushPreviewView.swift; sourceTree = "<group>"; };
+		0ABC5B031E5E10CB00B0FD6E /* StrokeJoinView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StrokeJoinView.swift; path = PaintingStudio/StrokeJoinView.swift; sourceTree = "<group>"; };
+		0ABC5B051E5E10ED00B0FD6E /* StrokeWidthView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StrokeWidthView.swift; path = PaintingStudio/StrokeWidthView.swift; sourceTree = "<group>"; };
+		0ABC5B071E5E112300B0FD6E /* NibView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NibView.swift; path = PaintingStudio/NibView.swift; sourceTree = "<group>"; };
+		0ABC5B091E5E115400B0FD6E /* ColorWheelView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ColorWheelView.swift; path = PaintingStudio/ColorWheelView.swift; sourceTree = "<group>"; };
+		0ABC5B0B1E5E117A00B0FD6E /* StrokeEndCapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StrokeEndCapView.swift; path = PaintingStudio/StrokeEndCapView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,13 +60,14 @@
 		0A248F7B1E5D3C7200DE6FB8 /* BrushChooser */ = {
 			isa = PBXGroup;
 			children = (
+				0ABC5AF31E5E0EAA00B0FD6E /* BrushChooserController.swift */,
 				0A248F7C1E5D3CCA00DE6FB8 /* BrushChooser.swift */,
-				0A248F7E1E5D3D2100DE6FB8 /* BrushPreviewView.swift */,
-				0A248F801E5D3D4300DE6FB8 /* ColorWheelView.swift */,
-				0A248F821E5D3D5D00DE6FB8 /* NibView.swift */,
-				0A248F841E5D3D7D00DE6FB8 /* StrokeEndCapView.swift */,
-				0A248F861E5D3D9D00DE6FB8 /* StrokeJoinView.swift */,
-				0A248F881E5D3DB700DE6FB8 /* StrokeWidthView.swift */,
+				0ABC5AFB1E5E104E00B0FD6E /* BrushPreviewView.swift */,
+				0ABC5B091E5E115400B0FD6E /* ColorWheelView.swift */,
+				0ABC5B071E5E112300B0FD6E /* NibView.swift */,
+				0ABC5B0B1E5E117A00B0FD6E /* StrokeEndCapView.swift */,
+				0ABC5B031E5E10CB00B0FD6E /* StrokeJoinView.swift */,
+				0ABC5B051E5E10ED00B0FD6E /* StrokeWidthView.swift */,
 			);
 			name = BrushChooser;
 			sourceTree = "<group>";
@@ -114,7 +117,7 @@
 			isa = PBXGroup;
 			children = (
 				0AAD6B331E57B8C000491102 /* PaintingViewController.swift */,
-				0A6E761B1E5D0377000EE6DD /* PaintingView.swift */,
+				0ABC5AF91E5E101E00B0FD6E /* PaintingView.swift */,
 			);
 			name = PaintingDetail;
 			sourceTree = "<group>";
@@ -190,19 +193,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0A248F811E5D3D4300DE6FB8 /* ColorWheelView.swift in Sources */,
-				0A248F851E5D3D7D00DE6FB8 /* StrokeEndCapView.swift in Sources */,
-				0A6E761C1E5D0377000EE6DD /* PaintingView.swift in Sources */,
+				0ABC5B0A1E5E115400B0FD6E /* ColorWheelView.swift in Sources */,
+				0ABC5B041E5E10CB00B0FD6E /* StrokeJoinView.swift in Sources */,
+				0ABC5B081E5E112300B0FD6E /* NibView.swift in Sources */,
 				0AAD6B1E1E57A83C00491102 /* AppDelegate.swift in Sources */,
-				0A248F7F1E5D3D2100DE6FB8 /* BrushPreviewView.swift in Sources */,
-				0A248F891E5D3DB700DE6FB8 /* StrokeWidthView.swift in Sources */,
-				0A248F831E5D3D5D00DE6FB8 /* NibView.swift in Sources */,
-				0A248F871E5D3D9D00DE6FB8 /* StrokeJoinView.swift in Sources */,
+				0ABC5AFC1E5E104E00B0FD6E /* BrushPreviewView.swift in Sources */,
+				0ABC5AF41E5E0EAA00B0FD6E /* BrushChooserController.swift in Sources */,
+				0ABC5B061E5E10ED00B0FD6E /* StrokeWidthView.swift in Sources */,
+				0ABC5AFA1E5E101E00B0FD6E /* PaintingView.swift in Sources */,
 				0AAD6B361E57BD9D00491102 /* PaintingCollection.swift in Sources */,
 				0AAD6B3A1E57C08600491102 /* Painting.swift in Sources */,
 				0AAD6B321E57B56100491102 /* PaintingListViewController.swift in Sources */,
 				0AAD6B341E57B8C000491102 /* PaintingViewController.swift in Sources */,
 				0A248F7D1E5D3CCA00DE6FB8 /* BrushChooser.swift in Sources */,
+				0ABC5B0C1E5E117A00B0FD6E /* StrokeEndCapView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
