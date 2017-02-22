@@ -31,7 +31,7 @@ class PaintingListViewController: UIViewController, UICollectionViewDataSource, 
         paintingListView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: NSStringFromClass(UICollectionViewCell.self))
         paintingListView.backgroundColor = UIColor.lightGray
         
-        let addButton = UIBarButtonItem(title: "add", style: .plain, target: self, action: #selector(createPaintingClicked))
+        let addButton = UIBarButtonItem(title: "Add", style: .plain, target: self, action: #selector(createPaintingClicked))
         self.navigationItem.rightBarButtonItem = addButton
         
         paintingListView.dataSource = self

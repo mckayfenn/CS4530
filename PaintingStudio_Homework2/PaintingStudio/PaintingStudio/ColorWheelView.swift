@@ -104,8 +104,8 @@ class ColorWheelView: UIControl {
         context?.addEllipse(in: nibRect)
         
         context?.drawPath(using: .fillStroke)
-        NSLog("Wheel orig:  x:(\(_wheelRect.midX)) y:(\(_wheelRect.midY))")
-        NSLog("Nib:         x:(\(nibRect.origin.x)) y:(\(nibRect.origin.y))")
+        //NSLog("Wheel orig:  x:(\(_wheelRect.midX)) y:(\(_wheelRect.midY))")
+        //NSLog("Nib:         x:(\(nibRect.origin.x)) y:(\(nibRect.origin.y))")
         //setNeedsDisplay()
     }
     

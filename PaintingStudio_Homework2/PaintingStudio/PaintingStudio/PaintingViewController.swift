@@ -13,6 +13,7 @@ class PaintingViewController: UIViewController {
     private var _paintingIndex: Int? = nil
     
     private var _brushChooser: BrushChooser? = nil
+    private var _brushChooserController: BrushChooserController? = nil
     
     var paintingCollection: PaintingCollection? {
         get { return _paintingCollection }
@@ -37,8 +38,8 @@ class PaintingViewController: UIViewController {
         //paintView.backgroundColor = UIColor.white
         //paintView.numberOfLines = -1
         
-        let delete: UIBarButtonItem = UIBarButtonItem(title: "delete", style: .plain, target: self, action: #selector(deletePaintingSelected))
-        let brush: UIBarButtonItem = UIBarButtonItem(title: "brush", style: .plain, target: self, action: #selector(brushSelected))
+        let delete: UIBarButtonItem = UIBarButtonItem(title: "Delete", style: .plain, target: self, action: #selector(deletePaintingSelected))
+        let brush: UIBarButtonItem = UIBarButtonItem(title: "Brush", style: .plain, target: self, action: #selector(brushSelected))
         super.navigationItem.rightBarButtonItems = [delete, brush]
     }
     
@@ -109,25 +110,32 @@ class PaintingViewController: UIViewController {
     func deletePaintingSelected() {
         NSLog("delete painting")
         _paintingCollection?.deletePaintingIndex(index: paintingIndex!)
+        _ = navigationController?.popViewController(animated: true)
     }
     
     func brushSelected() {
-        // open brush chooser
-        _brushChooser = BrushChooser(frame: UIScreen.main.bounds)
-        paintView.addSubview(_brushChooser!)
-        
+        NSLog("Brush Chooser selected")
         super.viewDidLoad()
-        self.navigationItem.hidesBackButton = true
-        let newBackButton = UIBarButtonItem(title: "Back", style: UIBarButtonItemStyle.plain, target: self, action: #selector(PaintingViewController.back(sender:)))
-        self.navigationItem.leftBarButtonItem = newBackButton
+        // open brush chooser
+//        _brushChooser = BrushChooser(frame: UIScreen.main.bounds)
+//        paintView.addSubview(_brushChooser!)
+//        
+//        
+//        self.navigationItem.hidesBackButton = true
+//        let newBackButton = UIBarButtonItem(title: "Back", style: UIBarButtonItemStyle.plain, target: self, action: #selector(PaintingViewController.back(sender:)))
+//        self.navigationItem.leftBarButtonItem = newBackButton
+//        
+//        _brushChooser?.colorWheel?.addTarget(self, action: #selector(knobChanged), for: UIControlEvents.valueChanged)
+//        
+//        _brushChooser?.endCap?.addTarget(self, action: #selector(buttButton), for: UIControlEvents.touchDown)
+//        
+//        _brushChooser?.strokeWidth?.widthSlider.addTarget(self, action: #selector(widthChanged), for: UIControlEvents.valueChanged)
+//        
+//        _brushChooser?.strokeJoin?.addTarget(self, action: #selector(joinSelected), for: UIControlEvents.touchDown)
         
-        _brushChooser?.colorWheel?.addTarget(self, action: #selector(knobChanged), for: UIControlEvents.valueChanged)
-        
-        _brushChooser?.endCap?.addTarget(self, action: #selector(buttButton), for: UIControlEvents.touchDown)
-        
-        _brushChooser?.strokeWidth?.widthSlider.addTarget(self, action: #selector(widthChanged), for: UIControlEvents.valueChanged)
-        
-        _brushChooser?.strokeJoin?.addTarget(self, action: #selector(joinSelected), for: UIControlEvents.touchDown)
+        _brushChooserController = BrushChooserController()
+        //self.present(_brushChooser!, animated: true, completion: nil)
+        self.navigationController?.pushViewController(_brushChooserController!, animated: true)
     }
     
     func back(sender: UIBarButtonItem) {

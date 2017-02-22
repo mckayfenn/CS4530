@@ -130,6 +130,7 @@ class StrokeEndCapView: UIControl {
     }
     func squareSelected()
     {
+        NSLog(".square true, others false")
         _butt = false
         _round = false
         _square = true
