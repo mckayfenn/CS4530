@@ -62,10 +62,15 @@ class PaintingListViewController: UIViewController, UICollectionViewDataSource, 
         cell.backgroundColor = UIColor.white
         
         
+        //let titleLabel: UILabel = cell.contentView.subviews.count == 0 ? UILabel(frame: CGRect(x: 0.0, y: 0.0, width: 50.0, height: 50.0)) : cell.contentView.subviews[0] as! UILabel
+        //cell.contentView.addSubview(titleLabel)
+        let paintViewController: PaintingViewController = PaintingViewController()
+        paintViewController.paintingCollection = _paintingCollection
+        //paintViewController.paintingIndex = paintingIndex
         
-        let titleLabel: UILabel = cell.contentView.subviews.count == 0 ? UILabel(frame: CGRect(x: 0.0, y: 0.0, width: 50.0, height: 50.0)) : cell.contentView.subviews[0] as! UILabel
-        titleLabel.text = "\(painting.strokes.count)"
-        cell.contentView.addSubview(titleLabel)
+        let paintView: PaintingView = paintViewController.paintView
+        
+        cell.contentView.addSubview(paintView)
         
         return cell
     }

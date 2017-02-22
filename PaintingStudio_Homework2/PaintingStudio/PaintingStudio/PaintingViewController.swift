@@ -21,20 +21,23 @@ class PaintingViewController: UIViewController {
         set { _paintingIndex = newValue }
     }
     
-    var labelView: UILabel {
-        return view as! UILabel
+    var paintView: PaintingView {
+        return view as! PaintingView
     }
     
     override func loadView() {
-        view = UILabel()
+        view = PaintingView()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        labelView.textAlignment = NSTextAlignment.center
-        labelView.backgroundColor = UIColor.white
-        labelView.numberOfLines = -1
-        super.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "delete", style: .plain, target: self, action: #selector(deletePaintingSelected))
+        //paintView.textAlignment = NSTextAlignment.center
+        //paintView.backgroundColor = UIColor.white
+        //paintView.numberOfLines = -1
+        
+        let delete: UIBarButtonItem = UIBarButtonItem(title: "delete", style: .plain, target: self, action: #selector(deletePaintingSelected))
+        let brush: UIBarButtonItem = UIBarButtonItem(title: "brush", style: .plain, target: self, action: #selector(brushSelected))
+        super.navigationItem.rightBarButtonItems = [delete, brush]
     }
     
 //    var painting: Painting? {
@@ -54,7 +57,8 @@ class PaintingViewController: UIViewController {
         //painting(painting, toPaintView: PaintingViewController.paintView)
         //paintViewController.labelView.text = "This painting is ugly! \(painting.strokes.count) that many strokes."
         let painting: Painting = _paintingCollection!.paintingWithIndex(paintingIndex: paintingIndex!)
-        labelView.text = "this is a painting"
+        paintView.painting = painting
+        //labelView.text = "this is a painting"
     }
     
 //    private func strokeToPolyLine(stroke: Stroke) -> PolyLine {
@@ -68,12 +72,44 @@ class PaintingViewController: UIViewController {
 //        }
 //    }
     
+//    private func polylineToStroke(line: PolyLine) -> Stroke {
+//        // get color components
+//        let c = line.color
+//        var r: CGFloat = 0, g: CGFloat = 0, b: CGFloat = 0
+//        c.getRed(&r, green: &g, blue: &b, alpha: nil)
+//        
+//        let stroke: Stroke = Stroke()
+//        stroke.color = Color(r: Double(r), g: Double(g), b: Double(b))
+//        
+//        stroke.width = Double(line.width)
+//
+//        
+//        return stroke
+//    }
+//    
+//    private func pointToCGPoint(point: Point) -> CGPoint {
+//        return CGPoint(x: point.x, y: point.y)
+//    }
+//    private func cgpointToPoint(cgpoint: CGPoint) -> Point {
+//        let point: Point = Point()
+//        point.x = Double(cgpoint.x)
+//        point.y = Double(cgpoint.y)
+//        return point
+//    }
+//    
+//    private func paintViewtoPainting(view: PaintingView) -> Painting {
+//        let paint: Painting = Painting()
+//        //paint.strokes
+//        
+//        return paint
+//    }
+    
     func deletePaintingSelected() {
         NSLog("delete painting")
         _paintingCollection?.deletePaintingIndex(index: paintingIndex!)
-        
-        
     }
     
-    
+    func brushSelected() {
+        // open brush chooser
+    }
 }

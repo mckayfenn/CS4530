@@ -37,7 +37,7 @@ class PaintingCollection {
     
     func addStroke(stroke: Stroke, toPainting paintIndex: Int) {
         let painting: Painting = paintingWithIndex(paintingIndex: paintIndex)
-        painting.strokes.append(stroke)
+        //painting.strokes.append(stroke)
         delegate?.collection(collection: self, strokeAddedToPainting: paintIndex)
     }
 

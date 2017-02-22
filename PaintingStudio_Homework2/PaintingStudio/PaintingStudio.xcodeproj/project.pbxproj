@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A248F7D1E5D3CCA00DE6FB8 /* BrushChooser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A248F7C1E5D3CCA00DE6FB8 /* BrushChooser.swift */; };
 		0A6E761C1E5D0377000EE6DD /* PaintingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6E761B1E5D0377000EE6DD /* PaintingView.swift */; };
 		0AAD6B1E1E57A83C00491102 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AAD6B1D1E57A83C00491102 /* AppDelegate.swift */; };
 		0AAD6B251E57A83C00491102 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0AAD6B241E57A83C00491102 /* Assets.xcassets */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0A248F7C1E5D3CCA00DE6FB8 /* BrushChooser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BrushChooser.swift; path = PaintingStudio/BrushChooser.swift; sourceTree = "<group>"; };
 		0A6E761B1E5D0377000EE6DD /* PaintingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaintingView.swift; sourceTree = "<group>"; };
 		0AAD6B1A1E57A83C00491102 /* PaintingStudio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PaintingStudio.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0AAD6B1D1E57A83C00491102 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = PaintingStudio/AppDelegate.swift; sourceTree = "<group>"; };
@@ -41,6 +43,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0A248F7B1E5D3C7200DE6FB8 /* BrushChooser */ = {
+			isa = PBXGroup;
+			children = (
+				0A248F7C1E5D3CCA00DE6FB8 /* BrushChooser.swift */,
+			);
+			name = BrushChooser;
+			sourceTree = "<group>";
+		};
 		0AAD6B111E57A83C00491102 = {
 			isa = PBXGroup;
 			children = (
@@ -51,6 +61,7 @@
 				0AAD6B381E57BDB800491102 /* PaintingDetail */,
 				0AAD6B371E57BDA800491102 /* PaintingList */,
 				0AAD6B1C1E57A83C00491102 /* DataModel */,
+				0A248F7B1E5D3C7200DE6FB8 /* BrushChooser */,
 				0AAD6B1B1E57A83C00491102 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -167,6 +178,7 @@
 				0AAD6B3A1E57C08600491102 /* Painting.swift in Sources */,
 				0AAD6B321E57B56100491102 /* PaintingListViewController.swift in Sources */,
 				0AAD6B341E57B8C000491102 /* PaintingViewController.swift in Sources */,
+				0A248F7D1E5D3CCA00DE6FB8 /* BrushChooser.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -6,15 +6,24 @@
 //  Copyright © 2017 McKay Fenn. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
-class Painting {
-    var strokes: [Stroke] = []
-    var aspectRatio: Double = 1.0
+class Painting: UIView {
+    //var strokes: [Stroke] = []
+    //var aspectRatio: Double = 1.0
+    var points: [CGPoint] = []
+    var color: UIColor?
+    var width: CGFloat = 0.0
+    var cap: CGLineCap?
+    var join: CGLineJoin?
+    
+    func addPoint(point: CGPoint) {
+        points.append(point)
+    }
 }
 
 class Stroke {
-    var color: Color = Color(r: 255,g: 255,b: 255)
+    var color: Color?
     var points: [Point] = []
     var width: Double = 1.0
 }
