@@ -23,6 +23,7 @@ class PaintingListViewController: UIViewController, UICollectionViewDataSource, 
         let paintingsListLayout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         
         view = UICollectionView(frame: CGRect.zero, collectionViewLayout: paintingsListLayout)
+        paintingListView.reloadData()
     }
     
     override func viewDidLoad() {
@@ -36,6 +37,7 @@ class PaintingListViewController: UIViewController, UICollectionViewDataSource, 
         
         paintingListView.dataSource = self
         paintingListView.delegate = self
+        paintingListView.reloadData()
     }
     
     

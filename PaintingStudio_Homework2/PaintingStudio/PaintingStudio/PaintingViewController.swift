@@ -34,13 +34,14 @@ class PaintingViewController: UIViewController {
         labelView.textAlignment = NSTextAlignment.center
         labelView.backgroundColor = UIColor.white
         labelView.numberOfLines = -1
+        super.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "delete", style: .plain, target: self, action: #selector(deletePaintingSelected))
     }
     
-    var painting: Painting? {
-        didSet {
-            // Load painting into view
-        }
-    }
+//    var painting: Painting? {
+//        didSet {
+//            // Load painting into view
+//        }
+//    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -66,4 +67,13 @@ class PaintingViewController: UIViewController {
 //            polylinePoint.y = point.x * paintingView.bounds.height
 //        }
 //    }
+    
+    func deletePaintingSelected() {
+        NSLog("delete painting")
+        _paintingCollection?.deletePaintingIndex(index: paintingIndex!)
+        
+        
+    }
+    
+    
 }
