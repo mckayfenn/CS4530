@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		0A248F7D1E5D3CCA00DE6FB8 /* BrushChooser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A248F7C1E5D3CCA00DE6FB8 /* BrushChooser.swift */; };
+		0A248F7F1E5D3D2100DE6FB8 /* BrushPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A248F7E1E5D3D2100DE6FB8 /* BrushPreviewView.swift */; };
+		0A248F811E5D3D4300DE6FB8 /* ColorWheelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A248F801E5D3D4300DE6FB8 /* ColorWheelView.swift */; };
+		0A248F831E5D3D5D00DE6FB8 /* NibView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A248F821E5D3D5D00DE6FB8 /* NibView.swift */; };
+		0A248F851E5D3D7D00DE6FB8 /* StrokeEndCapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A248F841E5D3D7D00DE6FB8 /* StrokeEndCapView.swift */; };
+		0A248F871E5D3D9D00DE6FB8 /* StrokeJoinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A248F861E5D3D9D00DE6FB8 /* StrokeJoinView.swift */; };
+		0A248F891E5D3DB700DE6FB8 /* StrokeWidthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A248F881E5D3DB700DE6FB8 /* StrokeWidthView.swift */; };
 		0A6E761C1E5D0377000EE6DD /* PaintingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6E761B1E5D0377000EE6DD /* PaintingView.swift */; };
 		0AAD6B1E1E57A83C00491102 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AAD6B1D1E57A83C00491102 /* AppDelegate.swift */; };
 		0AAD6B251E57A83C00491102 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0AAD6B241E57A83C00491102 /* Assets.xcassets */; };
@@ -20,6 +26,12 @@
 
 /* Begin PBXFileReference section */
 		0A248F7C1E5D3CCA00DE6FB8 /* BrushChooser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BrushChooser.swift; path = PaintingStudio/BrushChooser.swift; sourceTree = "<group>"; };
+		0A248F7E1E5D3D2100DE6FB8 /* BrushPreviewView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrushPreviewView.swift; sourceTree = "<group>"; };
+		0A248F801E5D3D4300DE6FB8 /* ColorWheelView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorWheelView.swift; sourceTree = "<group>"; };
+		0A248F821E5D3D5D00DE6FB8 /* NibView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NibView.swift; sourceTree = "<group>"; };
+		0A248F841E5D3D7D00DE6FB8 /* StrokeEndCapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StrokeEndCapView.swift; sourceTree = "<group>"; };
+		0A248F861E5D3D9D00DE6FB8 /* StrokeJoinView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StrokeJoinView.swift; sourceTree = "<group>"; };
+		0A248F881E5D3DB700DE6FB8 /* StrokeWidthView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StrokeWidthView.swift; sourceTree = "<group>"; };
 		0A6E761B1E5D0377000EE6DD /* PaintingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaintingView.swift; sourceTree = "<group>"; };
 		0AAD6B1A1E57A83C00491102 /* PaintingStudio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PaintingStudio.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0AAD6B1D1E57A83C00491102 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = PaintingStudio/AppDelegate.swift; sourceTree = "<group>"; };
@@ -47,6 +59,12 @@
 			isa = PBXGroup;
 			children = (
 				0A248F7C1E5D3CCA00DE6FB8 /* BrushChooser.swift */,
+				0A248F7E1E5D3D2100DE6FB8 /* BrushPreviewView.swift */,
+				0A248F801E5D3D4300DE6FB8 /* ColorWheelView.swift */,
+				0A248F821E5D3D5D00DE6FB8 /* NibView.swift */,
+				0A248F841E5D3D7D00DE6FB8 /* StrokeEndCapView.swift */,
+				0A248F861E5D3D9D00DE6FB8 /* StrokeJoinView.swift */,
+				0A248F881E5D3DB700DE6FB8 /* StrokeWidthView.swift */,
 			);
 			name = BrushChooser;
 			sourceTree = "<group>";
@@ -172,8 +190,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A248F811E5D3D4300DE6FB8 /* ColorWheelView.swift in Sources */,
+				0A248F851E5D3D7D00DE6FB8 /* StrokeEndCapView.swift in Sources */,
 				0A6E761C1E5D0377000EE6DD /* PaintingView.swift in Sources */,
 				0AAD6B1E1E57A83C00491102 /* AppDelegate.swift in Sources */,
+				0A248F7F1E5D3D2100DE6FB8 /* BrushPreviewView.swift in Sources */,
+				0A248F891E5D3DB700DE6FB8 /* StrokeWidthView.swift in Sources */,
+				0A248F831E5D3D5D00DE6FB8 /* NibView.swift in Sources */,
+				0A248F871E5D3D9D00DE6FB8 /* StrokeJoinView.swift in Sources */,
 				0AAD6B361E57BD9D00491102 /* PaintingCollection.swift in Sources */,
 				0AAD6B3A1E57C08600491102 /* Painting.swift in Sources */,
 				0AAD6B321E57B56100491102 /* PaintingListViewController.swift in Sources */,
