@@ -8,12 +8,17 @@
 
 import UIKit
 
-class PaintingViewController: UIViewController {
+class PaintingViewController: UIViewController, BrushChooserDelegate {
+    
+
     private var _paintingCollection: PaintingCollection? = nil
     private var _paintingIndex: Int? = nil
     
     private var _brushChooser: BrushChooser? = nil
     private var _brushChooserController: BrushChooserController? = nil
+    
+    private var _undoStack: [Line]? = []
+    private var _redoStack: [Line]? = []
     
     var paintingCollection: PaintingCollection? {
         get { return _paintingCollection }
@@ -34,14 +39,13 @@ class PaintingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //paintView.textAlignment = NSTextAlignment.center
-        //paintView.backgroundColor = UIColor.white
-        //paintView.numberOfLines = -1
         
-        //let delete: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: <#T##Selector?#>)
-        let delete: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(deletePaintingSelected))
-        let brush: UIBarButtonItem = UIBarButtonItem(title: "Brush", style: .plain, target: self, action: #selector(brushSelected))
-        super.navigationItem.rightBarButtonItems = [delete, brush]
+        let undo: UIBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .undo, target: self, action: #selector(undoSelected))
+        let redo: UIBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .redo, target: self, action: #selector(redoSelected))
+        let brush: UIBarButtonItem = UIBarButtonItem.init(title: "Brush", style: .plain, target: self, action: #selector(brushSelected))
+        let delete: UIBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .trash, target: self, action: #selector(deletePaintingSelected))
+        
+        super.navigationItem.rightBarButtonItems = [delete, brush, redo, undo]
     }
     
 //    var painting: Painting? {
@@ -121,7 +125,6 @@ class PaintingViewController: UIViewController {
 //        _brushChooser = BrushChooser(frame: UIScreen.main.bounds)
 //        paintView.addSubview(_brushChooser!)
 //        
-//        
 //        self.navigationItem.hidesBackButton = true
 //        let newBackButton = UIBarButtonItem(title: "Back", style: UIBarButtonItemStyle.plain, target: self, action: #selector(PaintingViewController.back(sender:)))
 //        self.navigationItem.leftBarButtonItem = newBackButton
@@ -135,6 +138,7 @@ class PaintingViewController: UIViewController {
 //        _brushChooser?.strokeJoin?.addTarget(self, action: #selector(joinSelected), for: UIControlEvents.touchDown)
         
         _brushChooserController = BrushChooserController()
+        _brushChooserController?.delegate = self
         //self.present(_brushChooser!, animated: true, completion: nil)
         self.navigationController?.pushViewController(_brushChooserController!, animated: true)
     }
@@ -143,77 +147,65 @@ class PaintingViewController: UIViewController {
         _ = navigationController?.popViewController(animated: true)
     }
     
-    func knobChanged() {
-        //NSLog("Changed to: \(_brushChooser?.colorWheel?.angle)")
-        _brushChooser?.preview?.color = (_brushChooser?.colorWheel?.color)!
-        paintView.painting.color = (_brushChooser?.colorWheel?.color)!
+    func undoSelected() {
+        let painting: Painting = _paintingCollection!.paintingWithIndex(paintingIndex: paintingIndex!)
+        
+        let line = painting.lines.popLast()!
+        _undoStack?.append(line)
+        paintView.setNeedsDisplay()
+
+    }
+    func redoSelected() {
+        paintView.painting.lines.append((_undoStack?.popLast())!)
+        paintView.setNeedsDisplay()
     }
     
-    func buttButton() {
-        //NSLog(".butt selected in app delegate")
-        let point = Float((_brushChooser?.endCap?.touchPoint.x)!)
-        let buttX = Float((_brushChooser?.endCap?.buttButton?.maxX)!)
-        let roundX = Float((_brushChooser?.endCap?.roundButton?.maxX)!)
-        let squareX = Float((_brushChooser?.endCap?.squareButton?.maxX)!)
-        
-        if (point < buttX)
-        {
-            //NSLog(".butt selected")
-            _brushChooser?.preview?.capState = CGLineCap.butt
-            _brushChooser?.endCap?.buttSelected()
-            paintView.painting.cap = CGLineCap.butt
-        }
-        else if (point < roundX)
-        {
-            //NSLog(".round selected")
-            _brushChooser?.preview?.capState = CGLineCap.round
-            _brushChooser?.endCap?.roundSelected()
-            paintView.painting.cap = CGLineCap.round
-        }
-        else if (point < squareX)
-        {
-            //NSLog(".square selected")
-            _brushChooser?.preview?.capState = CGLineCap.square
-            _brushChooser?.endCap?.squareSelected()
-            paintView.painting.cap = CGLineCap.square
-        }
-        
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let line: Line = Line()
+        line.width = _width
+        line.color = _color
+        line.join = _join
+        line.cap = _cap
+        paintView.painting.addLine(line: line)
     }
     
-    func joinSelected()
-    {
-        let point = Float((_brushChooser?.strokeJoin?.touchPoint.x)!)
-        let miterX = Float((_brushChooser?.strokeJoin?.miterJoin?.maxX)!)
-        let roundX = Float((_brushChooser?.strokeJoin?.roundJoin?.maxX)!)
-        let bevelX = Float((_brushChooser?.strokeJoin?.bevelJoin?.maxX)!)
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let touch: UITouch = touches.first!
         
-        if (point < miterX)
-        {
-            //NSLog(".miterJoin selected")
-            _brushChooser?.preview?.joinState = CGLineJoin.miter
-            _brushChooser?.strokeJoin?.miterSelected()
-            paintView.painting.join = .miter
-        }
-        else if (point < roundX)
-        {
-            //NSLog(".roundJoin selected")
-            _brushChooser?.preview?.joinState = CGLineJoin.round
-            _brushChooser?.strokeJoin?.roundSelected()
-            paintView.painting.join = .round
-        }
-        else if (point < bevelX)
-        {
-            //NSLog(".bevelJoin selected")
-            _brushChooser?.preview?.joinState = CGLineJoin.bevel
-            _brushChooser?.strokeJoin?.bevelSelected()
-            paintView.painting.join = .bevel
-        }
+        let touchPoint = touch.location(in: paintView)
+        paintView.painting.lines.last?.addPoint(point: touchPoint)
+        //NSLog("\(touchPoint)")
+        paintView.setNeedsDisplay()
     }
     
-    func widthChanged()
-    {
-        //NSLog("Width changed")
-        _brushChooser?.preview?.width = CGFloat((_brushChooser?.strokeWidth?.widthSlider.value)!)
-        paintView.painting.width = CGFloat((_brushChooser?.strokeWidth?.widthSlider.value)!)
+
+    
+    
+    
+    var _width: CGFloat = 1.0
+    var _color: UIColor = UIColor.white
+    var _cap: CGLineCap = .butt
+    var _join: CGLineJoin = .round
+    
+    
+    
+    
+    
+    func widthChanged(width: CGFloat) {
+        //paintView.painting.lines[paintView.painting.lines.count - 1].width = width
+        _width = width
+    }
+    func colorChanged(color: UIColor) {
+        //paintView.painting.lines[paintView.painting.lines.count - 1].color = color
+        _color = color
+    }
+    func capChanged(cap: CGLineCap) {
+        //paintView.painting.lines[paintView.painting.lines.count - 1].cap = cap
+        _cap = cap
+    }
+    func joinChanged(join: CGLineJoin) {
+        //paintView.painting.lines[paintView.painting.lines.count - 1].join = join
+        _join = join
     }
 }

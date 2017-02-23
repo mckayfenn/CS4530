@@ -115,7 +115,7 @@ class StrokeEndCapView: UIControl {
     
     func buttSelected()
     {
-        NSLog(".butt is true, others false")
+        //NSLog(".butt is true, others false")
         _butt = true
         _round = false
         _square = false
@@ -123,14 +123,14 @@ class StrokeEndCapView: UIControl {
     
     func roundSelected()
     {
-        NSLog(".round true, others false")
+        //NSLog(".round true, others false")
         _butt = false
         _round = true
         _square = false
     }
     func squareSelected()
     {
-        NSLog(".square true, others false")
+        //NSLog(".square true, others false")
         _butt = false
         _round = false
         _square = true

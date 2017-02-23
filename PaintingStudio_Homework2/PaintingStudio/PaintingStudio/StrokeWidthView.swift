@@ -13,7 +13,7 @@ class StrokeWidthView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        _widthSlider = UISlider(frame: CGRect(x: bounds.minX , y: bounds.minY, width: 300.0, height: 50.0))
+        _widthSlider = UISlider(frame: CGRect(x: bounds.minX+10 , y: bounds.minY, width: 300.0, height: 50.0))
         _widthSlider.minimumValue = 0.5
         _widthSlider.maximumValue = 50.0
         

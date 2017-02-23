@@ -9,14 +9,19 @@
 import UIKit
 
 class Painting: UIView {
-    //var strokes: [Stroke] = []
-    //var aspectRatio: Double = 1.0
-    var points: [CGPoint] = []
-    var color: UIColor?
-    var width: CGFloat = 0.0
-    var cap: CGLineCap?
-    var join: CGLineJoin?
+    var lines: [Line] = []
     
+    func addLine(line: Line) {
+        lines.append(line)
+    }
+}
+
+class Line {
+    var points: [CGPoint] = []
+    var color: UIColor = UIColor.white
+    var width: CGFloat = 1.0
+    var cap: CGLineCap = .butt
+    var join: CGLineJoin = .miter
     func addPoint(point: CGPoint) {
         points.append(point)
     }

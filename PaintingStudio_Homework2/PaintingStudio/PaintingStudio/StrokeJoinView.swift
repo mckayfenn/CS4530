@@ -122,21 +122,21 @@ class StrokeJoinView: UIControl {
     
     func miterSelected()
     {
-        NSLog("miter true")
+        //("miter true")
         _miter = true
         _round = false
         _bevel = false
     }
     func roundSelected()
     {
-        NSLog("round true")
+        //NSLog("round true")
         _miter = false
         _round = true
         _bevel = false
     }
     func bevelSelected()
     {
-        NSLog("bevel true")
+        //NSLog("bevel true")
         _miter = false
         _round = false
         _bevel = true

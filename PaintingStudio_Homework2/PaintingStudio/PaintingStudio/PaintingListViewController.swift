@@ -21,7 +21,7 @@ class PaintingListViewController: UIViewController, UICollectionViewDataSource, 
     // MARK: - UIViewController Overrides
     override func loadView() {
         let paintingsListLayout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        paintingsListLayout.itemSize = CGSize(width: 60, height: 80)
+        paintingsListLayout.itemSize = CGSize(width: 100, height: 130)
         paintingsListLayout.sectionInset = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
         
         view = UICollectionView(frame: CGRect.zero, collectionViewLayout: paintingsListLayout)
@@ -61,21 +61,32 @@ class PaintingListViewController: UIViewController, UICollectionViewDataSource, 
         
         // fill in the cell with the painting
         let cell: UICollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: NSStringFromClass(UICollectionViewCell.self), for: indexPath)
-        cell.backgroundColor = UIColor.white
+        //cell.backgroundColor = UIColor.white
+        //cell.layer.borderColor = UIColor.black.cgColor
+        //cell.layer.borderWidth = 1.0
+        //cell.layer.cornerRadius = 10.0
         
+        //let paintView = cell.contentView.subviews[indexPath.item] as! PaintingView
         
         //let titleLabel: UILabel = cell.contentView.subviews.count == 0 ? UILabel(frame: CGRect(x: 0.0, y: 0.0, width: 50.0, height: 50.0)) : cell.contentView.subviews[0] as! UILabel
         //cell.contentView.addSubview(titleLabel)
-        let paintViewController: PaintingViewController = PaintingViewController()
-        paintViewController.paintingCollection = _paintingCollection
+        //let paintViewController: PaintingViewController = PaintingViewController()
+        //paintViewController.paintingCollection = _paintingCollection
         //paintViewController.paintingIndex = paintingIndex
         
-        let paintView: PaintingView = paintViewController.paintView
+        let paintView: PaintingView = PaintingView()
+        paintView.frame = cell.bounds
+        paintView.painting = painting
+        
+        cell.contentView.isUserInteractionEnabled = false
+        
+        //let paintView: PaintingView = cell.contentView.subviews.count == 0 ? PaintingView() : cell.contentView.subviews[0] as! PaintingView
         
         cell.contentView.addSubview(paintView)
         
         return cell
     }
+
     
     
     // MARK: - UICollecitonViewDelegate Methods

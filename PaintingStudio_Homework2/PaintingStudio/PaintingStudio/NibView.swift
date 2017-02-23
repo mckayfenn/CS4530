@@ -51,7 +51,7 @@ class NibView: UIView
         get { return _color }
         set
         {
-            NSLog("new nib color \(_color)")
+            //NSLog("new nib color \(_color)")
             _color = newValue
             setNeedsDisplay()
         }

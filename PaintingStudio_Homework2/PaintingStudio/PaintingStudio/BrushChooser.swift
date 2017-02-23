@@ -40,8 +40,6 @@ class BrushChooser: UIControl {
         _brushPreview = BrushPreviewView()
         _brushPreview?.frame = CGRect(x: 10.0, y: 400.0, width: bounds.size.width, height: 50.0)
         addSubview(_brushPreview!)
-        
-        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -76,4 +74,5 @@ class BrushChooser: UIControl {
     var strokeWidth: StrokeWidthView? { return _strokeWidth }
     var strokeJoin: StrokeJoinView? { return _strokeJoin }
     var preview: BrushPreviewView? { return _brushPreview }
+    
 }
