@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PaintingView: UIView {
+class CellView: UIView {
     var painting: Painting = Painting()
     var context: CGContext? = nil
     
@@ -31,23 +31,26 @@ class PaintingView: UIView {
         
         context?.clear(_preview)
         
-        for line in painting.lines {
-            for point in line.points {
-                if (point.equalTo(line.points.first!)) {
+        for cellLine in painting.cellLines {
+            for point in cellLine.points {
+                if (point.equalTo(cellLine.points.first!)) {
                     context?.move(to: point)
                 }
                 else {
                     context?.addLine(to: point)
                 }
             }
-            context?.setStrokeColor(line.color.cgColor)
-            context?.setLineWidth(line.width)
-            context?.setLineCap(line.cap)
-            context?.setLineJoin(line.join)
+            context?.setStrokeColor(cellLine.color.cgColor)
+            context?.setLineWidth(cellLine.width)
+            context?.setLineCap(cellLine.cap)
+            context?.setLineJoin(cellLine.join)
             context?.drawPath(using: .stroke)
         }
         
     }
+    
+
+    
     
     
     var _width: CGFloat = 1.0
@@ -55,5 +58,5 @@ class PaintingView: UIView {
     var _cap: CGLineCap = .butt
     var _join: CGLineJoin = .miter
     
-
+    
 }

@@ -34,12 +34,6 @@ class PaintingCollection {
     func deletePaintingIndex(index: Int) {
         _paintings.remove(at: index)
     }
-    
-    func addStroke(stroke: Stroke, toPainting paintIndex: Int) {
-        let painting: Painting = paintingWithIndex(paintingIndex: paintIndex)
-        //painting.strokes.append(stroke)
-        delegate?.collection(collection: self, strokeAddedToPainting: paintIndex)
-    }
 
     // MARK: - Events
     weak var delegate: PaintingCollectionDelegate?

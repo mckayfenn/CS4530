@@ -26,7 +26,7 @@ class ColorWheelView: UIControl {
         _nib = NibView()
         
         // TODO: What if bounds.size.width is > bounds.size.height
-        _wheelRect = CGRect(x: 52.0, y: 50.0, width: bounds.size.width / 1.5, height: bounds.size.height / 1.5)
+        _wheelRect = CGRect(x: 52.0, y: 80, width: bounds.size.width / 1.5, height: bounds.size.height / 1.5)
         
         context = UIGraphicsGetCurrentContext()!
         //context.setFillColor(UIColor.lightGray.cgColor)

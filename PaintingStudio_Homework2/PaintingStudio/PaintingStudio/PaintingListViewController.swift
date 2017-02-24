@@ -21,8 +21,8 @@ class PaintingListViewController: UIViewController, UICollectionViewDataSource, 
     // MARK: - UIViewController Overrides
     override func loadView() {
         let paintingsListLayout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        paintingsListLayout.itemSize = CGSize(width: 100, height: 130)
-        paintingsListLayout.sectionInset = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
+        paintingsListLayout.itemSize = CGSize(width: 144, height: 256)
+        paintingsListLayout.sectionInset = UIEdgeInsets(top: 20, left: 10, bottom: 20, right: 10)
         
         view = UICollectionView(frame: CGRect.zero, collectionViewLayout: paintingsListLayout)
     }
@@ -61,28 +61,14 @@ class PaintingListViewController: UIViewController, UICollectionViewDataSource, 
         
         // fill in the cell with the painting
         let cell: UICollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: NSStringFromClass(UICollectionViewCell.self), for: indexPath)
-        //cell.backgroundColor = UIColor.white
-        //cell.layer.borderColor = UIColor.black.cgColor
-        //cell.layer.borderWidth = 1.0
-        //cell.layer.cornerRadius = 10.0
-        
-        //let paintView = cell.contentView.subviews[indexPath.item] as! PaintingView
-        
-        //let titleLabel: UILabel = cell.contentView.subviews.count == 0 ? UILabel(frame: CGRect(x: 0.0, y: 0.0, width: 50.0, height: 50.0)) : cell.contentView.subviews[0] as! UILabel
-        //cell.contentView.addSubview(titleLabel)
-        //let paintViewController: PaintingViewController = PaintingViewController()
-        //paintViewController.paintingCollection = _paintingCollection
-        //paintViewController.paintingIndex = paintingIndex
-        
-        let paintView: PaintingView = PaintingView()
-        paintView.frame = cell.bounds
-        paintView.painting = painting
+
+        let cellView: CellView = CellView()
+        cellView.frame = cell.bounds
+        cellView.painting = painting
         
         cell.contentView.isUserInteractionEnabled = false
         
-        //let paintView: PaintingView = cell.contentView.subviews.count == 0 ? PaintingView() : cell.contentView.subviews[0] as! PaintingView
-        
-        cell.contentView.addSubview(paintView)
+        cell.contentView.addSubview(cellView)
         
         return cell
     }
@@ -92,7 +78,6 @@ class PaintingListViewController: UIViewController, UICollectionViewDataSource, 
     // MARK: - UICollecitonViewDelegate Methods
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         // Obtain data element based on indexPath
-        //let painting: Painting = _paintingCollection.paintingWithIndex(paintingIndex: indexPath.item)
         let paintingIndex: Int = indexPath.item
         
         // Build a view controller and get it the data it needs
@@ -100,7 +85,6 @@ class PaintingListViewController: UIViewController, UICollectionViewDataSource, 
         let paintViewController: PaintingViewController = PaintingViewController()
         paintViewController.paintingCollection = _paintingCollection
         paintViewController.paintingIndex = paintingIndex
-        
         
         
         navigationController?.pushViewController(paintViewController, animated: true)
@@ -111,14 +95,6 @@ class PaintingListViewController: UIViewController, UICollectionViewDataSource, 
         paintingListView.reloadData()
     }
     
-//    private func paintingFromPaintView(paintView: PaintView) -> Painting {
-//        // Convert from PaintView to a Painting
-//    }
-//    
-//    private func painting(paint: Painting, toPaintView: PaintView) {
-//        // Convert from Painting to PaintView
-//    }
-
     // MARK: - PaintingCollectionDelegate Methods
     func collection(collection: PaintingCollection, strokeAddedToPainting paintIndex: Int) {
         paintingListView.reloadData()

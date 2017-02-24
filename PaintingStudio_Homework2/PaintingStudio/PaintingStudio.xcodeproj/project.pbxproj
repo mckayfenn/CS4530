@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0A248F7D1E5D3CCA00DE6FB8 /* BrushChooser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A248F7C1E5D3CCA00DE6FB8 /* BrushChooser.swift */; };
+		0A54AC601E5FCE3D001E04B4 /* CellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A54AC5F1E5FCE3D001E04B4 /* CellView.swift */; };
 		0AAD6B1E1E57A83C00491102 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AAD6B1D1E57A83C00491102 /* AppDelegate.swift */; };
 		0AAD6B251E57A83C00491102 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0AAD6B241E57A83C00491102 /* Assets.xcassets */; };
 		0AAD6B301E57A93000491102 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AAD6B2F1E57A93000491102 /* Default-568h@2x.png */; };
@@ -27,6 +28,7 @@
 
 /* Begin PBXFileReference section */
 		0A248F7C1E5D3CCA00DE6FB8 /* BrushChooser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BrushChooser.swift; path = PaintingStudio/BrushChooser.swift; sourceTree = "<group>"; };
+		0A54AC5F1E5FCE3D001E04B4 /* CellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellView.swift; sourceTree = "<group>"; };
 		0AAD6B1A1E57A83C00491102 /* PaintingStudio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PaintingStudio.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0AAD6B1D1E57A83C00491102 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = PaintingStudio/AppDelegate.swift; sourceTree = "<group>"; };
 		0AAD6B241E57A83C00491102 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = PaintingStudio/Assets.xcassets; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 			children = (
 				0AAD6B331E57B8C000491102 /* PaintingViewController.swift */,
 				0ABC5AF91E5E101E00B0FD6E /* PaintingView.swift */,
+				0A54AC5F1E5FCE3D001E04B4 /* CellView.swift */,
 			);
 			name = PaintingDetail;
 			sourceTree = "<group>";
@@ -204,6 +207,7 @@
 				0AAD6B361E57BD9D00491102 /* PaintingCollection.swift in Sources */,
 				0AAD6B3A1E57C08600491102 /* Painting.swift in Sources */,
 				0AAD6B321E57B56100491102 /* PaintingListViewController.swift in Sources */,
+				0A54AC601E5FCE3D001E04B4 /* CellView.swift in Sources */,
 				0AAD6B341E57B8C000491102 /* PaintingViewController.swift in Sources */,
 				0A248F7D1E5D3CCA00DE6FB8 /* BrushChooser.swift in Sources */,
 				0ABC5B0C1E5E117A00B0FD6E /* StrokeEndCapView.swift in Sources */,
