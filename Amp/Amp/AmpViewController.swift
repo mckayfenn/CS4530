@@ -9,6 +9,11 @@
 import UIKit
 
 class AmpViewController: UIViewController {
+    
+    deinit {
+        ampView.volumeKnob.valueChangedHandler = nil
+        ampView.bassKnob.valueChangedHandler = nil
+    }
 
     override func loadView() {
         view = AmpView()
