@@ -10,14 +10,31 @@ import Foundation
 
 class Game {
     
+    // ------------------------------
+    // MARK: - Static Members
+    // ------------------------------
     public enum Token {
         case none
         case x
         case o
     }
     
+    // ------------------------------
+    // MARK: - Instance Data
+    // ------------------------------
     private var _board: [[Token]] = [[.none, .none, .none], [.none, .none, .none], [.none, .none, .none]]
     
+    
+    // ------------------------------
+    // MARK: - Attributes
+    // ------------------------------
+    
+    /// Determins the current player.
+    ///
+    /// Give additional detail.
+    ///
+    /// @return @a true if the player is the X player, @a false if it is the O player
+    ///
     public var currentPlayerIsX: Bool {
         return movesTaken % 2 == 0
     }
@@ -43,6 +60,10 @@ class Game {
         return _board
     }
     
+    
+    // ------------------------------
+    // MARK: - Moves
+    // ------------------------------
     public func takeMove(col: Int, row: Int) {
         if (_board[col][row] == .none) {
             _board[col][row] = currentPlayerIsX ? .x : .o
