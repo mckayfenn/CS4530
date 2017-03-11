@@ -10,6 +10,10 @@
 		0AD0D30F1E734EA4007D93EB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD0D30E1E734EA4007D93EB /* AppDelegate.swift */; };
 		0AD0D3111E734EA4007D93EB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD0D3101E734EA4007D93EB /* ViewController.swift */; };
 		0AD0D3161E734EA4007D93EB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0AD0D3151E734EA4007D93EB /* Assets.xcassets */; };
+		0AD0D3211E735CDB007D93EB /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD0D3201E735CDB007D93EB /* GameModel.swift */; };
+		0AD0D3231E736DBE007D93EB /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD0D3221E736DBE007D93EB /* GameView.swift */; };
+		0AD0D3251E736F89007D93EB /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD0D3241E736F89007D93EB /* GameViewController.swift */; };
+		0AD0D3271E73701C007D93EB /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AD0D3261E73701C007D93EB /* Default-568h@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -18,6 +22,10 @@
 		0AD0D3101E734EA4007D93EB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		0AD0D3151E734EA4007D93EB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0AD0D31A1E734EA4007D93EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0AD0D3201E735CDB007D93EB /* GameModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameModel.swift; sourceTree = "<group>"; };
+		0AD0D3221E736DBE007D93EB /* GameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
+		0AD0D3241E736F89007D93EB /* GameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		0AD0D3261E73701C007D93EB /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../Default-568h@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +62,10 @@
 				0AD0D3101E734EA4007D93EB /* ViewController.swift */,
 				0AD0D3151E734EA4007D93EB /* Assets.xcassets */,
 				0AD0D31A1E734EA4007D93EB /* Info.plist */,
+				0AD0D3201E735CDB007D93EB /* GameModel.swift */,
+				0AD0D3221E736DBE007D93EB /* GameView.swift */,
+				0AD0D3241E736F89007D93EB /* GameViewController.swift */,
+				0AD0D3261E73701C007D93EB /* Default-568h@2x.png */,
 			);
 			path = MVCBattleship_Homework3;
 			sourceTree = "<group>";
@@ -118,6 +130,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0AD0D3161E734EA4007D93EB /* Assets.xcassets in Resources */,
+				0AD0D3271E73701C007D93EB /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -128,8 +141,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0AD0D3251E736F89007D93EB /* GameViewController.swift in Sources */,
 				0AD0D3111E734EA4007D93EB /* ViewController.swift in Sources */,
 				0AD0D30F1E734EA4007D93EB /* AppDelegate.swift in Sources */,
+				0AD0D3231E736DBE007D93EB /* GameView.swift in Sources */,
+				0AD0D3211E735CDB007D93EB /* GameModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
