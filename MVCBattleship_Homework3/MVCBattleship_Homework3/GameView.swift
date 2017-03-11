@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol GameViewDelegate: class {
+    func tochedInRect(row: Int, col: Int)
+}
+
 class GameView: UIView {
     override func draw(_ rect: CGRect) {
         super.draw(rect)
@@ -57,20 +61,21 @@ class GameView: UIView {
         
         
         
-
         
         
-        // Draw ships, hit or misses
+        enemyGridRects.removeAll()
+        // Draw ENEMY ships, hit or misses
         for tokenIndex: Int in 0 ..< min (100, p1Grid.count) {
             let token: NSString = p1Grid[tokenIndex] as NSString
-            let tokenCol: Int = tokenIndex % 10
-            let tokenRow: Int = tokenIndex / 10
+            let tokenCol: Int = tokenIndex / 10
+            let tokenRow: Int = tokenIndex % 10
             
             var tokenRect: CGRect = CGRect.zero
             tokenRect.size.width = enemyShipsRect.width * 0.1
             tokenRect.size.height = enemyShipsRect.height * 0.1
             tokenRect.origin.x = enemyShipsRect.minX + tokenRect.width * CGFloat(tokenCol)
             tokenRect.origin.y = enemyShipsRect.minY + tokenRect.height * CGFloat(tokenRow)
+            enemyGridRects.append(tokenRect)
             
             //context.addRect(tokenRect)
             if (token == "none") {
@@ -88,17 +93,19 @@ class GameView: UIView {
             }
         }
         
-        // Draw ships, hit or misses
+        myGridRects.removeAll()
+        // Draw MY ships, hit or misses
         for tokenIndex: Int in 0 ..< min (100, p2Grid.count) {
             let token: NSString = p2Grid[tokenIndex] as NSString
-            let tokenCol: Int = tokenIndex % 10
-            let tokenRow: Int = tokenIndex / 10
+            let tokenCol: Int = tokenIndex / 10
+            let tokenRow: Int = tokenIndex % 10
             
             var tokenRect: CGRect = CGRect.zero
             tokenRect.size.width = myShipsRect.width * 0.1
             tokenRect.size.height = myShipsRect.height * 0.1
             tokenRect.origin.x = myShipsRect.minX + tokenRect.width * CGFloat(tokenCol)
             tokenRect.origin.y = myShipsRect.minY + tokenRect.height * CGFloat(tokenRow)
+            myGridRects.append(tokenRect)
             
             //context.addRect(tokenRect)
             if (token == "none") {
@@ -155,27 +162,50 @@ class GameView: UIView {
         context.drawPath(using: .stroke)
     }
     
-
-    public var p1Grid: [String] = ["none", "none", "none", "none", "none", "hit", "hit", "none", "none", "none",
-                                   "miss", "none", "none", "none", "none", "none", "none", "none", "none", "none",
-                                   "miss", "none", "none", "none", "none", "none", "none", "none", "none", "none",
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let touch: UITouch = touches.first!
+        
+        let touchPoint = touch.location(in: self)
+        
+        for index: Int in 0 ..< enemyGridRects.count {
+            let smallR: CGRect = enemyGridRects[index]
+            let col: Int = index / 10
+            let row: Int = index % 10
+            
+            if (smallR.contains(touchPoint)) {
+                delegate?.tochedInRect(row: row, col: col)
+            }
+        }
+        
+        setNeedsDisplay()
+    }
+    
+    weak var delegate: GameViewDelegate? = nil
+    
+    public var myGridRects = [CGRect]()
+    public var enemyGridRects = [CGRect]()
+    
+    public var p1Grid: [String] = ["none", "none", "none", "none", "none", "none", "none", "none", "none", "none",
                                    "none", "none", "none", "none", "none", "none", "none", "none", "none", "none",
                                    "none", "none", "none", "none", "none", "none", "none", "none", "none", "none",
                                    "none", "none", "none", "none", "none", "none", "none", "none", "none", "none",
                                    "none", "none", "none", "none", "none", "none", "none", "none", "none", "none",
                                    "none", "none", "none", "none", "none", "none", "none", "none", "none", "none",
                                    "none", "none", "none", "none", "none", "none", "none", "none", "none", "none",
-                                   "ship", "ship", "ship", "none", "none", "none", "none", "none", "none", "none"
-                                    ]
-    public var p2Grid: [String] = ["none", "hit", "hit", "hit", "none", "none", "none", "none", "none", "none",
+                                   "none", "none", "none", "none", "none", "none", "none", "none", "none", "none",
+                                   "none", "none", "none", "none", "none", "none", "none", "none", "none", "none",
+                                   "none", "none", "none", "none", "none", "none", "none", "none", "none", "none"
+    ]
+    public var p2Grid: [String] = ["none", "none", "none", "none", "none", "none", "none", "none", "none", "none",
                                    "none", "none", "none", "none", "none", "none", "none", "none", "none", "none",
                                    "none", "none", "none", "none", "none", "none", "none", "none", "none", "none",
                                    "none", "none", "none", "none", "none", "none", "none", "none", "none", "none",
                                    "none", "none", "none", "none", "none", "none", "none", "none", "none", "none",
                                    "none", "none", "none", "none", "none", "none", "none", "none", "none", "none",
-                                   "none", "miss", "miss", "none", "none", "none", "none", "none", "none", "none",
                                    "none", "none", "none", "none", "none", "none", "none", "none", "none", "none",
                                    "none", "none", "none", "none", "none", "none", "none", "none", "none", "none",
-                                   "none", "none", "none", "none", "none", "none", "ship", "ship", "ship", "ship"
-                                    ]
+                                   "none", "none", "none", "none", "none", "none", "none", "none", "none", "none",
+                                   "none", "none", "none", "none", "none", "none", "none", "none", "none", "none"
+    ]
 }

@@ -17,9 +17,11 @@ class Game {
         case ship
     }
     
-    private var currentPlayer: Bool = true // start out with p1
+    private var currentPlayer: Bool = false // start out with p1
     
-    private var _p1Grid: [[Ships]] = [[.none, .none, .none, .none, .none, .none, .none, .none, .none, .none],
+    
+    // ENEMY ships
+    private var _p1Grid: [[Ships]] = [[.ship, .ship, .none, .none, .none, .none, .none, .none, .none, .none],
                                       [.none, .none, .none, .none, .none, .none, .none, .none, .none, .none],
                                       [.none, .none, .none, .none, .none, .none, .none, .none, .none, .none],
                                       [.none, .none, .none, .none, .none, .none, .none, .none, .none, .none],
@@ -31,8 +33,10 @@ class Game {
                                       [.none, .none, .none, .none, .none, .none, .none, .none, .none, .none],
                                       ]
     
+    
+    // MY ships
     private var _p2Grid: [[Ships]] = [[.none, .none, .none, .none, .none, .none, .none, .none, .none, .none],
-                                      [.none, .none, .none, .none, .none, .none, .none, .none, .none, .none],
+                                      [.none, .none, .none, .none, .none, .ship, .none, .none, .none, .none],
                                       [.none, .none, .none, .none, .none, .none, .none, .none, .none, .none],
                                       [.none, .none, .none, .none, .none, .none, .none, .none, .none, .none],
                                       [.none, .none, .none, .none, .none, .none, .none, .none, .none, .none],
@@ -74,7 +78,7 @@ class Game {
                 _p1Grid[row][col] = .hit
             }
         }
-        currentPlayer = !currentPlayer
+        //currentPlayer = !currentPlayer
     }
     
 }

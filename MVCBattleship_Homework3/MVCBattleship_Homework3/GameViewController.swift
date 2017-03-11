@@ -8,15 +8,20 @@
 
 import UIKit
 
-class GameViewController: UIViewController {
+class GameViewController: UIViewController, GameViewDelegate {
     private let _game: Game = Game()
     
     override func loadView() {
         view = GameView()
+        gameView.delegate = self
     }
     
     override func viewDidLoad() {
         view.backgroundColor = UIColor.white
+        
+        gameView.delegate = self
+        
+        
         _game.takeMove(row: 1, col: 1)
         _game.takeMove(row: 3, col: 2)
         refresh()
@@ -26,16 +31,23 @@ class GameViewController: UIViewController {
         return view as! GameView
     }
     
+    func tochedInRect(row: Int, col: Int) {
+        NSLog("take move in \(row), \(col)")
+        _game.takeMove(row: row, col: col)
+        refresh()
+        
+    }
+    
     func refresh() {
         var p1Tokens: [String] = []
         for boardRow: Int in 0 ..< _game.p1Grid.count {
             for boardCol: Int in 0 ..< _game.p1Grid.count {
                 let token: Game.Ships = _game.p1Grid[boardRow][boardCol]
                 switch token {
-                    case .none : p1Tokens.append("none")
-                    case .miss : p1Tokens.append("miss")
-                    case .ship : p1Tokens.append("ship")
-                    case .hit : p1Tokens.append("hit")
+                case .none : p1Tokens.append("none")
+                case .miss : p1Tokens.append("miss")
+                case .ship : p1Tokens.append("ship")
+                case .hit : p1Tokens.append("hit")
                 }
             }
         }
