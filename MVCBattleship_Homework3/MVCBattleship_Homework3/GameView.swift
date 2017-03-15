@@ -13,6 +13,8 @@ protocol GameViewDelegate: class {
 }
 
 class GameView: UIView {
+    var game: Game = Game()
+    
     override func draw(_ rect: CGRect) {
         super.draw(rect)
         
@@ -170,8 +172,8 @@ class GameView: UIView {
         
         for index: Int in 0 ..< enemyGridRects.count {
             let smallR: CGRect = enemyGridRects[index]
-            let col: Int = index / 10
-            let row: Int = index % 10
+            let col: Int = index % 10
+            let row: Int = index / 10
             
             if (smallR.contains(touchPoint)) {
                 delegate?.tochedInRect(row: row, col: col)

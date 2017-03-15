@@ -9,7 +9,21 @@
 import UIKit
 
 class GameViewController: UIViewController, GameViewDelegate {
-    private let _game: Game = Game()
+    private var _gameList: GameList? = nil
+    private var _gameIndex: Int? = nil
+    
+    var gameList: GameList? {
+        get { return _gameList }
+        set { _gameList = newValue }
+    }
+    var gameIndex: Int? {
+        get { return _gameIndex }
+        set { _gameIndex = newValue }
+    }
+    
+    var gameView: GameView {
+        return view as! GameView
+    }
     
     override func loadView() {
         view = GameView()
@@ -22,27 +36,40 @@ class GameViewController: UIViewController, GameViewDelegate {
         gameView.delegate = self
         
         
-        _game.takeMove(row: 1, col: 1)
-        _game.takeMove(row: 3, col: 2)
+//        _game.takeMove(row: 1, col: 1)
+//        _game.takeMove(row: 3, col: 2)
         refresh()
     }
     
-    var gameView: GameView {
-        return view as! GameView
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+        if(_gameList == nil || _gameIndex == nil) {
+            return
+        }
+        
+        let game: Game = (_gameList?.gameWithIndex(gameIndex: gameIndex!))!
+        gameView.game = game
+    }
+    
+    func deleteGameSelected() {
+        NSLog("delete game selected")
+        _gameList?.deletePaintingIndex(gameIndex: gameIndex!)
+        _ = navigationController?.popViewController(animated: true)
     }
     
     func tochedInRect(row: Int, col: Int) {
         NSLog("take move in \(row), \(col)")
-        _game.takeMove(row: row, col: col)
+        _gameList?.gameWithIndex(gameIndex: gameIndex!).takeMove(row: row, col: col)
         refresh()
         
     }
     
     func refresh() {
         var p1Tokens: [String] = []
-        for boardRow: Int in 0 ..< _game.p1Grid.count {
-            for boardCol: Int in 0 ..< _game.p1Grid.count {
-                let token: Game.Ships = _game.p1Grid[boardRow][boardCol]
+        for boardRow: Int in 0 ..< (_gameList?.gameWithIndex(gameIndex: gameIndex!).p1Grid.count)! {
+            for boardCol: Int in 0 ..< (_gameList?.gameWithIndex(gameIndex: gameIndex!).p1Grid.count)! {
+                let token: Game.Ships = (_gameList?.gameWithIndex(gameIndex: gameIndex!).p1Grid[boardRow][boardCol])!
                 switch token {
                 case .none : p1Tokens.append("none")
                 case .miss : p1Tokens.append("miss")
@@ -53,9 +80,9 @@ class GameViewController: UIViewController, GameViewDelegate {
         }
         
         var p2Tokens: [String] = []
-        for boardRow: Int in 0 ..< _game.p2Grid.count {
-            for boardCol: Int in 0 ..< _game.p2Grid.count {
-                let token: Game.Ships = _game.p2Grid[boardRow][boardCol]
+        for boardRow: Int in 0 ..< (_gameList?.gameWithIndex(gameIndex: gameIndex!).p2Grid.count)! {
+            for boardCol: Int in 0 ..< (_gameList?.gameWithIndex(gameIndex: gameIndex!).p2Grid.count)! {
+                let token: Game.Ships = (_gameList?.gameWithIndex(gameIndex: gameIndex!).p2Grid[boardRow][boardCol])!
                 switch token {
                 case .none : p2Tokens.append("none")
                 case .miss : p2Tokens.append("miss")
@@ -65,7 +92,14 @@ class GameViewController: UIViewController, GameViewDelegate {
             }
         }
         
-        gameView.p1Grid = p1Tokens
-        gameView.p2Grid = p2Tokens
+        if (_gameList?.gameWithIndex(gameIndex: gameIndex!).currentPlayerIs1)! {
+            gameView.p1Grid = p2Tokens
+            gameView.p2Grid = p1Tokens
+        }
+        else {
+            gameView.p1Grid = p1Tokens
+            gameView.p2Grid = p2Tokens
+        }
+        
     }
 }

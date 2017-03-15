@@ -17,7 +17,7 @@ class Game {
         case ship
     }
     
-    private var currentPlayer: Bool = false // start out with p1
+    private var currentPlayer1: Bool = false // start out with p1
     
     
     // ENEMY ships
@@ -48,7 +48,7 @@ class Game {
                                       ]
     
     public var currentPlayerIs1: Bool {
-        return currentPlayer
+        return currentPlayer1
     }
     
     public var p1Grid: [[Ships]] {
@@ -60,7 +60,7 @@ class Game {
     }
     
     public func takeMove(row:Int, col: Int) {
-        if (currentPlayer) {
+        if (currentPlayer1) {
             if (_p2Grid[row][col] == .none) {
                 _p2Grid[row][col] = .miss
             }
@@ -78,7 +78,7 @@ class Game {
                 _p1Grid[row][col] = .hit
             }
         }
-        //currentPlayer = !currentPlayer
+        currentPlayer1 = !currentPlayer1
     }
     
 }

@@ -14,6 +14,8 @@
 		0AD0D3231E736DBE007D93EB /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD0D3221E736DBE007D93EB /* GameView.swift */; };
 		0AD0D3251E736F89007D93EB /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD0D3241E736F89007D93EB /* GameViewController.swift */; };
 		0AD0D3271E73701C007D93EB /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AD0D3261E73701C007D93EB /* Default-568h@2x.png */; };
+		FBB86CFD1E78B4E7009F8091 /* GameListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB86CFC1E78B4E7009F8091 /* GameListViewController.swift */; };
+		FBB86CFF1E78BF44009F8091 /* GameList.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB86CFE1E78BF44009F8091 /* GameList.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		0AD0D3221E736DBE007D93EB /* GameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		0AD0D3241E736F89007D93EB /* GameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		0AD0D3261E73701C007D93EB /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../Default-568h@2x.png"; sourceTree = "<group>"; };
+		FBB86CFC1E78B4E7009F8091 /* GameListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameListViewController.swift; sourceTree = "<group>"; };
+		FBB86CFE1E78BF44009F8091 /* GameList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameList.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +62,7 @@
 		0AD0D30D1E734EA4007D93EB /* MVCBattleship_Homework3 */ = {
 			isa = PBXGroup;
 			children = (
+				0AD0D3261E73701C007D93EB /* Default-568h@2x.png */,
 				0AD0D30E1E734EA4007D93EB /* AppDelegate.swift */,
 				0AD0D3101E734EA4007D93EB /* ViewController.swift */,
 				0AD0D3151E734EA4007D93EB /* Assets.xcassets */,
@@ -65,7 +70,8 @@
 				0AD0D3201E735CDB007D93EB /* GameModel.swift */,
 				0AD0D3221E736DBE007D93EB /* GameView.swift */,
 				0AD0D3241E736F89007D93EB /* GameViewController.swift */,
-				0AD0D3261E73701C007D93EB /* Default-568h@2x.png */,
+				FBB86CFC1E78B4E7009F8091 /* GameListViewController.swift */,
+				FBB86CFE1E78BF44009F8091 /* GameList.swift */,
 			);
 			path = MVCBattleship_Homework3;
 			sourceTree = "<group>";
@@ -145,6 +151,8 @@
 				0AD0D3111E734EA4007D93EB /* ViewController.swift in Sources */,
 				0AD0D30F1E734EA4007D93EB /* AppDelegate.swift in Sources */,
 				0AD0D3231E736DBE007D93EB /* GameView.swift in Sources */,
+				FBB86CFD1E78B4E7009F8091 /* GameListViewController.swift in Sources */,
+				FBB86CFF1E78BF44009F8091 /* GameList.swift in Sources */,
 				0AD0D3211E735CDB007D93EB /* GameModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -288,6 +296,7 @@
 				0AD0D31F1E734EA4007D93EB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
