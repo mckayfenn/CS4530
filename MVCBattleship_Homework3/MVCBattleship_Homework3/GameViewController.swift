@@ -36,8 +36,8 @@ class GameViewController: UIViewController, GameViewDelegate {
         gameView.delegate = self
         
         
-//        _game.takeMove(row: 1, col: 1)
-//        _game.takeMove(row: 3, col: 2)
+        //        _game.takeMove(row: 1, col: 1)
+        //        _game.takeMove(row: 3, col: 2)
         refresh()
     }
     
@@ -59,8 +59,11 @@ class GameViewController: UIViewController, GameViewDelegate {
     }
     
     func tochedInRect(row: Int, col: Int) {
-        NSLog("take move in \(row), \(col)")
+        NSLog("take move in row:\(row), col:\(col)")
         _gameList?.gameWithIndex(gameIndex: gameIndex!).takeMove(row: row, col: col)
+        
+        _ = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(showChangeScreen), userInfo: nil, repeats: false)
+        
         refresh()
         
     }
@@ -92,6 +95,8 @@ class GameViewController: UIViewController, GameViewDelegate {
             }
         }
         
+        //view.setNeedsDisplay()
+        
         if (_gameList?.gameWithIndex(gameIndex: gameIndex!).currentPlayerIs1)! {
             gameView.p1Grid = p2Tokens
             gameView.p2Grid = p1Tokens
@@ -100,6 +105,13 @@ class GameViewController: UIViewController, GameViewDelegate {
             gameView.p1Grid = p1Tokens
             gameView.p2Grid = p2Tokens
         }
+        //view.setNeedsDisplay()
         
+        
+    }
+    
+    func showChangeScreen() {
+        let change: UIViewController = ChangePlayerView()
+        self.navigationController?.pushViewController(change, animated: true)
     }
 }

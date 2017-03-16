@@ -28,6 +28,9 @@ class GameListViewController: UIViewController, UITableViewDataSource, UITableVi
         _gameListView.dataSource = self
         _gameListView.delegate = self
     }
+    override func viewWillAppear(_ animated: Bool) {
+        _gameListView.reloadData()
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return _gameList.gameCount

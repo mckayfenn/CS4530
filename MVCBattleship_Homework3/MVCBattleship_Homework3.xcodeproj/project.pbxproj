@@ -16,6 +16,7 @@
 		0AD0D3271E73701C007D93EB /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AD0D3261E73701C007D93EB /* Default-568h@2x.png */; };
 		FBB86CFD1E78B4E7009F8091 /* GameListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB86CFC1E78B4E7009F8091 /* GameListViewController.swift */; };
 		FBB86CFF1E78BF44009F8091 /* GameList.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB86CFE1E78BF44009F8091 /* GameList.swift */; };
+		FBEF109F1E7A1BDD006F0CD4 /* ChangePlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBEF109E1E7A1BDD006F0CD4 /* ChangePlayerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		0AD0D3261E73701C007D93EB /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../Default-568h@2x.png"; sourceTree = "<group>"; };
 		FBB86CFC1E78B4E7009F8091 /* GameListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameListViewController.swift; sourceTree = "<group>"; };
 		FBB86CFE1E78BF44009F8091 /* GameList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameList.swift; sourceTree = "<group>"; };
+		FBEF109E1E7A1BDD006F0CD4 /* ChangePlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePlayerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +74,7 @@
 				0AD0D3241E736F89007D93EB /* GameViewController.swift */,
 				FBB86CFC1E78B4E7009F8091 /* GameListViewController.swift */,
 				FBB86CFE1E78BF44009F8091 /* GameList.swift */,
+				FBEF109E1E7A1BDD006F0CD4 /* ChangePlayerView.swift */,
 			);
 			path = MVCBattleship_Homework3;
 			sourceTree = "<group>";
@@ -154,6 +157,7 @@
 				FBB86CFD1E78B4E7009F8091 /* GameListViewController.swift in Sources */,
 				FBB86CFF1E78BF44009F8091 /* GameList.swift in Sources */,
 				0AD0D3211E735CDB007D93EB /* GameModel.swift in Sources */,
+				FBEF109F1E7A1BDD006F0CD4 /* ChangePlayerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

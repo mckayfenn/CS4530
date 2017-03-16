@@ -66,9 +66,10 @@ class GameView: UIView {
         
         
         enemyGridRects.removeAll()
+        var enemyShips = p1Grid
         // Draw ENEMY ships, hit or misses
-        for tokenIndex: Int in 0 ..< min (100, p1Grid.count) {
-            let token: NSString = p1Grid[tokenIndex] as NSString
+        for tokenIndex: Int in 0 ..< min (100, enemyShips.count) {
+            let token: NSString = enemyShips[tokenIndex] as NSString
             let tokenCol: Int = tokenIndex / 10
             let tokenRow: Int = tokenIndex % 10
             
@@ -96,9 +97,10 @@ class GameView: UIView {
         }
         
         myGridRects.removeAll()
+        var myShips = p2Grid
         // Draw MY ships, hit or misses
-        for tokenIndex: Int in 0 ..< min (100, p2Grid.count) {
-            let token: NSString = p2Grid[tokenIndex] as NSString
+        for tokenIndex: Int in 0 ..< min (100, myShips.count) {
+            let token: NSString = myShips[tokenIndex] as NSString
             let tokenCol: Int = tokenIndex / 10
             let tokenRow: Int = tokenIndex % 10
             
@@ -165,7 +167,7 @@ class GameView: UIView {
     }
     
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         let touch: UITouch = touches.first!
         
         let touchPoint = touch.location(in: self)
@@ -176,14 +178,33 @@ class GameView: UIView {
             let row: Int = index / 10
             
             if (smallR.contains(touchPoint)) {
+                
                 delegate?.tochedInRect(row: row, col: col)
             }
         }
         
+        
         setNeedsDisplay()
     }
     
+    
+    
+    func update() {
+        //present view controller
+        NSLog("show view controller")
+        
+        setNeedsDisplay()
+        
+    }
+    
+    
+    
+    
+    
     weak var delegate: GameViewDelegate? = nil
+    
+    
+    
     
     public var myGridRects = [CGRect]()
     public var enemyGridRects = [CGRect]()
@@ -199,6 +220,7 @@ class GameView: UIView {
                                    "none", "none", "none", "none", "none", "none", "none", "none", "none", "none",
                                    "none", "none", "none", "none", "none", "none", "none", "none", "none", "none"
     ]
+    
     public var p2Grid: [String] = ["none", "none", "none", "none", "none", "none", "none", "none", "none", "none",
                                    "none", "none", "none", "none", "none", "none", "none", "none", "none", "none",
                                    "none", "none", "none", "none", "none", "none", "none", "none", "none", "none",
