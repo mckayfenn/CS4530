@@ -8,6 +8,10 @@
 
 import Foundation
 
+protocol GameModelDelegate: class {
+    func showTouchedStatus(status: String)
+}
+
 class Game {
     
     public enum Ships {
@@ -63,22 +67,28 @@ class Game {
         if (currentPlayer1) {
             if (_p2Grid[row][col] == .none) {
                 _p2Grid[row][col] = .miss
+                delegate?.showTouchedStatus(status: "Miss!")
             }
             else if (_p2Grid[row][col] == .ship)
             {
                 _p2Grid[row][col] = .hit
+                delegate?.showTouchedStatus(status: "Hit!")
             }
         }
         else {
             if (_p1Grid[row][col] == .none) {
                 _p1Grid[row][col] = .miss
+                delegate?.showTouchedStatus(status: "Miss!")
             }
             else if (_p1Grid[row][col] == .ship)
             {
                 _p1Grid[row][col] = .hit
+                delegate?.showTouchedStatus(status: "Hit!")
             }
         }
         currentPlayer1 = !currentPlayer1
     }
+    
+    weak var delegate: GameModelDelegate? = nil
     
 }

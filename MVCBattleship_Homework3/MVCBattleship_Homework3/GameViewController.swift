@@ -8,7 +8,7 @@
 
 import UIKit
 
-class GameViewController: UIViewController, GameViewDelegate {
+class GameViewController: UIViewController, GameViewDelegate, GameModelDelegate {
     private var _gameList: GameList? = nil
     private var _gameIndex: Int? = nil
     
@@ -28,16 +28,17 @@ class GameViewController: UIViewController, GameViewDelegate {
     override func loadView() {
         view = GameView()
         gameView.delegate = self
+        _gameList?.gameWithIndex(gameIndex: gameIndex!).delegate = self
     }
     
     override func viewDidLoad() {
         view.backgroundColor = UIColor.white
         
         gameView.delegate = self
+        _gameList?.gameWithIndex(gameIndex: gameIndex!).delegate = self
+
+        dontAllowMultipleTouches()
         
-        
-        //        _game.takeMove(row: 1, col: 1)
-        //        _game.takeMove(row: 3, col: 2)
         refresh()
     }
     
@@ -50,6 +51,10 @@ class GameViewController: UIViewController, GameViewDelegate {
         
         let game: Game = (_gameList?.gameWithIndex(gameIndex: gameIndex!))!
         gameView.game = game
+        
+        dontAllowMultipleTouches()
+        
+        switchGrids()
     }
     
     func deleteGameSelected() {
@@ -59,17 +64,24 @@ class GameViewController: UIViewController, GameViewDelegate {
     }
     
     func tochedInRect(row: Int, col: Int) {
-        NSLog("take move in row:\(row), col:\(col)")
-        _gameList?.gameWithIndex(gameIndex: gameIndex!).takeMove(row: row, col: col)
+        if (!multipleTouches) {
+            //NSLog("take move in row:\(row), col:\(col)")
+            _gameList?.gameWithIndex(gameIndex: gameIndex!).takeMove(row: row, col: col)
         
-        _ = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(showChangeScreen), userInfo: nil, repeats: false)
+            _ = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(showChangeScreen), userInfo: nil, repeats: false)
         
-        refresh()
+            refresh()
+        }
+        multipleTouches = true
         
     }
     
+    
+    private var p1Tokens: [String] = []
+    private var p2Tokens: [String] = []
     func refresh() {
-        var p1Tokens: [String] = []
+        p1Tokens = []
+        //var p1Tokens: [String] = []
         for boardRow: Int in 0 ..< (_gameList?.gameWithIndex(gameIndex: gameIndex!).p1Grid.count)! {
             for boardCol: Int in 0 ..< (_gameList?.gameWithIndex(gameIndex: gameIndex!).p1Grid.count)! {
                 let token: Game.Ships = (_gameList?.gameWithIndex(gameIndex: gameIndex!).p1Grid[boardRow][boardCol])!
@@ -82,7 +94,8 @@ class GameViewController: UIViewController, GameViewDelegate {
             }
         }
         
-        var p2Tokens: [String] = []
+        p2Tokens = []
+        //var p2Tokens: [String] = []
         for boardRow: Int in 0 ..< (_gameList?.gameWithIndex(gameIndex: gameIndex!).p2Grid.count)! {
             for boardCol: Int in 0 ..< (_gameList?.gameWithIndex(gameIndex: gameIndex!).p2Grid.count)! {
                 let token: Game.Ships = (_gameList?.gameWithIndex(gameIndex: gameIndex!).p2Grid[boardRow][boardCol])!
@@ -97,6 +110,22 @@ class GameViewController: UIViewController, GameViewDelegate {
         
         //view.setNeedsDisplay()
         
+        
+        //view.setNeedsDisplay()
+        if (_gameList?.gameWithIndex(gameIndex: gameIndex!).currentPlayerIs1)! {
+            gameView.p1Grid = p1Tokens
+            gameView.p2Grid = p2Tokens
+        }
+        else {
+            gameView.p1Grid = p2Tokens
+            gameView.p2Grid = p1Tokens
+        }
+        gameView.setNeedsDisplay()
+        
+    }
+    
+    func switchGrids() {
+        NSLog("switch grids")
         if (_gameList?.gameWithIndex(gameIndex: gameIndex!).currentPlayerIs1)! {
             gameView.p1Grid = p2Tokens
             gameView.p2Grid = p1Tokens
@@ -105,9 +134,27 @@ class GameViewController: UIViewController, GameViewDelegate {
             gameView.p1Grid = p1Tokens
             gameView.p2Grid = p2Tokens
         }
-        //view.setNeedsDisplay()
+        gameView.setNeedsDisplay()
+    }
+    
+    private var multipleTouches = false
+    
+    func dontAllowMultipleTouches() {
+        multipleTouches = false
+    }
+    
+    private var alert: UIAlertController!
+    
+    func showTouchedStatus(status: String) {
+        //alert = UIAlertController(title: status, message: nil, preferredStyle: UIAlertControllerStyle.alert)
         
+        //self.present(alert, animated: true, completion: nil)
         
+        //_ = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(dismissAlert), userInfo: nil, repeats: false)
+
+    }
+    func dismissAlert() {
+        self.alert.dismiss(animated: true, completion: nil)
     }
     
     func showChangeScreen() {
