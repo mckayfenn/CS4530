@@ -27,6 +27,7 @@ class GameViewController: UIViewController, GameViewDelegate, GameModelDelegate 
     
     override func loadView() {
         view = GameView()
+        self.edgesForExtendedLayout = []
         gameView.delegate = self
         _gameList?.gameWithIndex(gameIndex: gameIndex!).delegate = self
     }
