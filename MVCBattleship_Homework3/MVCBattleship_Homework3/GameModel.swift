@@ -37,52 +37,19 @@ class Game {
         // List of Ships
         let ships = [5, 4, 3, 3, 2]
         
+        var allShipsPlaced = 0
         
-        for ship in ships {
-            
-            let randX = Int(arc4random_uniform(10)) // column
-            let randY = Int(arc4random_uniform(10)) // row
-            let orientation = Int(arc4random_uniform(2))
-            
-            var validPlace = true
-            
-            if (orientation == 0)  { // Horizontal
-                var xPos = randX
-                for length: Int in 0 ..< ship {
-                    
-                    if (xPos < 9 && _p1Grid[randY][xPos] == .none) {
-                        validPlace = true
-                    }
-                    else {
-                        validPlace = false
-                    }
-                    
-                    // If all positions were valid then place the ship
-                    if (length == ship - 1 && validPlace) {
-                        setShip(grid: 1, ship: ship, randY: randY, randX: randX, orientation: orientation)
-                    }
-                    
-                    xPos = xPos + 1
+        var currentShipIndex = 0
+        var currentShip = ships[currentShipIndex]
+        
+        while allShipsPlaced < 5 {
+            if (placeShip(shipLength: currentShip)) {
+                NSLog("Ship \(currentShip) placed")
+                if (currentShipIndex < 4) {
+                    currentShipIndex = currentShipIndex + 1
+                    currentShip = ships[currentShipIndex]
                 }
-            }
-            else { // Vertical
-                var yPos = randY
-                for length: Int in 0 ..< ship {
-                    
-                    if (yPos < 9 && _p1Grid[yPos][randX] == .none) {
-                        validPlace = true
-                    }
-                    else {
-                        validPlace = false
-                    }
-                    
-                    // If all positions were valid then place the ship
-                    if (length == ship - 1 && validPlace) {
-                        setShip(grid: 1, ship: ship, randY: randY, randX: randX, orientation: orientation)
-                    }
-                    
-                    yPos = yPos + 1
-                }
+                allShipsPlaced = allShipsPlaced + 1
             }
         }
         
@@ -90,56 +57,126 @@ class Game {
         
         
         // Now do it again for grid2
-        let ships2 = [5, 4, 3, 3, 2]
+
+        allShipsPlaced = 0
+        currentShipIndex = 0
+        currentShip = ships[currentShipIndex]
         
-        
-        for ship in ships2 {
-            
-            let randX = Int(arc4random_uniform(10)) // column
-            let randY = Int(arc4random_uniform(10)) // row
-            let orientation = Int(arc4random_uniform(2))
-            
-            var validPlace = true
-            
-            if (orientation == 0)  { // Horizontal
-                var xPos = randX
-                for length: Int in 0 ..< ship {
-                    
-                    if (xPos < 9 && _p1Grid[randY][xPos] == .none) {
-                        validPlace = true
-                    }
-                    else {
-                        validPlace = false
-                    }
-                    
-                    // If all positions were valid then place the ship
-                    if (length == ship - 1 && validPlace) {
-                        setShip(grid: 2, ship: ship, randY: randY, randX: randX, orientation: orientation)
-                    }
-                    
-                    xPos = xPos + 1
+        while allShipsPlaced < 5 {
+            if (placeShip2(shipLength: currentShip)) {
+                NSLog("P2 Ship \(currentShip) placed")
+                if (currentShipIndex < 4) {
+                    currentShipIndex = currentShipIndex + 1
+                    currentShip = ships[currentShipIndex]
                 }
-            }
-            else { // Vertical
-                var yPos = randY
-                for length: Int in 0 ..< ship {
-                    
-                    if (yPos < 9 && _p1Grid[yPos][randX] == .none) {
-                        validPlace = true
-                    }
-                    else {
-                        validPlace = false
-                    }
-                    
-                    // If all positions were valid then place the ship
-                    if (length == ship - 1 && validPlace) {
-                        setShip(grid: 2, ship: ship, randY: randY, randX: randX, orientation: orientation)
-                    }
-                    
-                    yPos = yPos + 1
-                }
+                allShipsPlaced = allShipsPlaced + 1
             }
         }
+       
+    }
+    
+    
+    
+    private func placeShip(shipLength: Int) -> Bool{
+        
+        
+        let randX = Int(arc4random_uniform(10)) // column
+        let randY = Int(arc4random_uniform(10)) // row
+        let orientation = Int(arc4random_uniform(2))
+        
+        var validPlace = true
+        
+        if (orientation == 0)  { // Horizontal
+            var xPos = randX
+            for length: Int in 0 ..< shipLength {
+                
+                if (xPos < 9 && _p1Grid[randY][xPos] == .none) {
+                    validPlace = true
+                }
+                else {
+                    validPlace = false
+                }
+                
+                // If all positions were valid then place the ship
+                if (length == shipLength - 1 && validPlace) {
+                    setShip(grid: 1, ship: shipLength, randY: randY, randX: randX, orientation: orientation)
+                }
+                
+                xPos = xPos + 1
+            }
+        }
+        else { // Vertical
+            var yPos = randY
+            for length: Int in 0 ..< shipLength {
+                
+                if (yPos < 9 && _p1Grid[yPos][randX] == .none) {
+                    validPlace = true
+                }
+                else {
+                    validPlace = false
+                }
+                
+                // If all positions were valid then place the ship
+                if (length == shipLength - 1 && validPlace) {
+                    setShip(grid: 1, ship: shipLength, randY: randY, randX: randX, orientation: orientation)
+                }
+                
+                yPos = yPos + 1
+            }
+        }
+        
+        return validPlace
+    }
+    
+    private func placeShip2(shipLength: Int) -> Bool{
+        
+        
+        let randX = Int(arc4random_uniform(10)) // column
+        let randY = Int(arc4random_uniform(10)) // row
+        let orientation = Int(arc4random_uniform(2))
+        
+        var validPlace = true
+        
+        if (orientation == 0)  { // Horizontal
+            var xPos = randX
+            for length: Int in 0 ..< shipLength {
+                
+                if (xPos < 9 && _p2Grid[randY][xPos] == .none) {
+                    validPlace = true
+                }
+                else {
+                    validPlace = false
+                }
+                
+                // If all positions were valid then place the ship
+                if (length == shipLength - 1 && validPlace) {
+                    setShip(grid: 2, ship: shipLength, randY: randY, randX: randX, orientation: orientation)
+                }
+                
+                xPos = xPos + 1
+            }
+        }
+        else { // Vertical
+            var yPos = randY
+            for length: Int in 0 ..< shipLength {
+                
+                if (yPos < 9 && _p2Grid[yPos][randX] == .none) {
+                    validPlace = true
+                }
+                else {
+                    validPlace = false
+                }
+                
+                // If all positions were valid then place the ship
+                if (length == shipLength - 1 && validPlace) {
+                    setShip(grid: 2, ship: shipLength, randY: randY, randX: randX, orientation: orientation)
+                }
+                
+                yPos = yPos + 1
+            }
+        }
+        
+        return validPlace
     }
     
     private func setShip(grid: Int, ship:Int, randY: Int, randX: Int, orientation: Int) {
@@ -152,7 +189,7 @@ class Game {
         else {
             yPos = randY
         }
-
+        
         
         for length: Int in 0 ..< ship {
             if (orientation == 0) {
