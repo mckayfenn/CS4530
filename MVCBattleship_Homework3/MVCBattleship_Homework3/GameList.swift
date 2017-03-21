@@ -13,22 +13,29 @@ protocol GameListDelegate: class {
 }
 
 class GameList {
+    
+    // TODO: Thread Safety!!!
+    public static let Instance: GameList = GameList()
+    
+    private init() {
+        
+    }
+    
     private var _games: [Game] = []
     
     var gameCount: Int {
         return _games.count
     }
     
-    func createGame(game: Game) {
-        _games.append(game)
-        NSLog("new game created")
+    func createGame() {
+        _games.append(Game())
     }
     
     func gameWithIndex(gameIndex: Int) -> Game {
         return _games[gameIndex]
     }
     
-    func deletePaintingIndex(gameIndex: Int) {
+    func deleteGameIndex(gameIndex: Int) {
             _games.remove(at: gameIndex)
     }
     

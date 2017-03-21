@@ -11,7 +11,8 @@ import UIKit
 class GameListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, GameListDelegate {
     
     private var _gameListView: UITableView! { return view as! UITableView }
-    private var _gameList: GameList = GameList()
+    //private var _gameList: GameList = GameList()
+    private var _gameList: GameList = GameList.Instance
     
     override func loadView() {
         let gameTableView: UITableView = UITableView()
@@ -46,8 +47,9 @@ class GameListViewController: UIViewController, UITableViewDataSource, UITableVi
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let gameIndex: Int = indexPath.row
+        let game: Game = _gameList.gameWithIndex(gameIndex: gameIndex)
         
-        let gameDetailViewController: GameViewController = GameViewController()
+        let gameDetailViewController: GameViewController = GameViewController(game: game)
         gameDetailViewController.gameList = _gameList
         gameDetailViewController.gameIndex = gameIndex
         
@@ -60,7 +62,7 @@ class GameListViewController: UIViewController, UITableViewDataSource, UITableVi
     
     
     func createGameClicked() {
-        _gameList.createGame(game: Game())
+        _gameList.createGame()
         _gameListView.reloadData()
     }
     

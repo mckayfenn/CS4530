@@ -12,6 +12,8 @@ class GameViewController: UIViewController, GameViewDelegate, GameModelDelegate 
     private var _gameList: GameList? = nil
     private var _gameIndex: Int? = nil
     
+    private var _game: Game
+    
     var gameList: GameList? {
         get { return _gameList }
         set { _gameList = newValue }
@@ -25,18 +27,28 @@ class GameViewController: UIViewController, GameViewDelegate, GameModelDelegate 
         return view as! GameView
     }
     
+    init (game: Game) {
+        _game = game
+        super.init(nibName: nil, bundle: nil)
+        _game.delegates.append(self)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func loadView() {
         view = GameView()
         self.edgesForExtendedLayout = []
         gameView.delegate = self
-        _gameList?.gameWithIndex(gameIndex: gameIndex!).delegate = self
+        _game.delegates.append(self)
     }
     
     override func viewDidLoad() {
         view.backgroundColor = UIColor.white
         
         gameView.delegate = self
-        _gameList?.gameWithIndex(gameIndex: gameIndex!).delegate = self
+        _game.delegates.append(self)
 
         dontAllowMultipleTouches()
         
@@ -60,17 +72,20 @@ class GameViewController: UIViewController, GameViewDelegate, GameModelDelegate 
     
     func deleteGameSelected() {
         NSLog("delete game selected")
-        _gameList?.deletePaintingIndex(gameIndex: gameIndex!)
+        _gameList?.deleteGameIndex(gameIndex: gameIndex!)
         _ = navigationController?.popViewController(animated: true)
     }
     
     func tochedInRect(row: Int, col: Int) {
+        // Only allow a single selection per turn.
         if (!multipleTouches) {
             //NSLog("take move in row:\(row), col:\(col)")
             _gameList?.gameWithIndex(gameIndex: gameIndex!).takeMove(row: row, col: col)
         
             _ = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(showChangeScreen), userInfo: nil, repeats: false)
         
+            // TODO: Make this change in response to the game actually changing
+            
             refresh()
         }
         multipleTouches = true
