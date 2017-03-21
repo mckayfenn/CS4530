@@ -90,39 +90,46 @@ class Game {
             var xPos = randX
             for length: Int in 0 ..< shipLength {
                 
-                if (xPos < 9 && _p1Grid[randY][xPos] == .none) {
+                if (xPos < 10 && _p1Grid[randY][xPos] == .none) {
                     validPlace = true
                 }
                 else {
                     validPlace = false
+                    return validPlace
                 }
                 
                 // If all positions were valid then place the ship
-                if (length == shipLength - 1 && validPlace) {
-                    setShip(grid: 1, ship: shipLength, randY: randY, randX: randX, orientation: orientation)
-                }
+//                if (length == shipLength - 1 && validPlace) {
+//                    setShip(grid: 1, ship: shipLength, randY: randY, randX: randX, orientation: orientation)
+//                }
                 
                 xPos = xPos + 1
             }
+            // if it got to here then it's a valid position
+            
+            setShip(grid: 1, ship: shipLength, randY: randY, randX: randX, orientation: orientation)
+            
         }
         else { // Vertical
             var yPos = randY
             for length: Int in 0 ..< shipLength {
                 
-                if (yPos < 9 && _p1Grid[yPos][randX] == .none) {
+                if (yPos < 10 && _p1Grid[yPos][randX] == .none) {
                     validPlace = true
                 }
                 else {
                     validPlace = false
+                    return validPlace
                 }
                 
                 // If all positions were valid then place the ship
-                if (length == shipLength - 1 && validPlace) {
-                    setShip(grid: 1, ship: shipLength, randY: randY, randX: randX, orientation: orientation)
-                }
+//                if (length == shipLength - 1 && validPlace) {
+//                    setShip(grid: 1, ship: shipLength, randY: randY, randX: randX, orientation: orientation)
+//                }
                 
                 yPos = yPos + 1
             }
+            setShip(grid: 1, ship: shipLength, randY: randY, randX: randX, orientation: orientation)
         }
         
         return validPlace
@@ -141,39 +148,44 @@ class Game {
             var xPos = randX
             for length: Int in 0 ..< shipLength {
                 
-                if (xPos < 9 && _p2Grid[randY][xPos] == .none) {
+                if (xPos < 10 && _p2Grid[randY][xPos] == .none) {
                     validPlace = true
                 }
                 else {
                     validPlace = false
+                    return validPlace
                 }
                 
                 // If all positions were valid then place the ship
-                if (length == shipLength - 1 && validPlace) {
-                    setShip(grid: 2, ship: shipLength, randY: randY, randX: randX, orientation: orientation)
-                }
+//                if (length == shipLength - 1 && validPlace) {
+//                    setShip(grid: 2, ship: shipLength, randY: randY, randX: randX, orientation: orientation)
+//                }
                 
                 xPos = xPos + 1
             }
+            setShip(grid: 2, ship: shipLength, randY: randY, randX: randX, orientation: orientation)
+
         }
         else { // Vertical
             var yPos = randY
             for length: Int in 0 ..< shipLength {
                 
-                if (yPos < 9 && _p2Grid[yPos][randX] == .none) {
+                if (yPos < 10 && _p2Grid[yPos][randX] == .none) {
                     validPlace = true
                 }
                 else {
                     validPlace = false
+                    return validPlace
                 }
                 
                 // If all positions were valid then place the ship
-                if (length == shipLength - 1 && validPlace) {
-                    setShip(grid: 2, ship: shipLength, randY: randY, randX: randX, orientation: orientation)
-                }
+//                if (length == shipLength - 1 && validPlace) {
+//                    setShip(grid: 2, ship: shipLength, randY: randY, randX: randX, orientation: orientation)
+//                }
                 
                 yPos = yPos + 1
             }
+            setShip(grid: 2, ship: shipLength, randY: randY, randX: randX, orientation: orientation)
         }
         
         return validPlace
