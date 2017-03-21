@@ -11,6 +11,7 @@ import Foundation
 protocol GameListDelegate: class {
     func list(list: GameList)
     func boardChanged()
+    func gameWon(player: Int)
 }
 
 class GameList: GameModelDelegate {
@@ -73,11 +74,12 @@ class GameList: GameModelDelegate {
     // MARK: - GameModelDelegate Methods
     func showTouchedStatus(status: String) {
         // TODO: something here
-        delegate?.boardChanged()
+        //delegate?.boardChanged()
     }
     
-    func showPlayerWon(player: String) {
+    func showPlayerWon(player: Int) {
         // do it here?
+        delegate?.gameWon(player: player)
     }
     
     weak var delegate: GameListDelegate?

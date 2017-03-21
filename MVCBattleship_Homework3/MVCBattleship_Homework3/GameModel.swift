@@ -10,7 +10,7 @@ import Foundation
 
 protocol GameModelDelegate: class {
     func showTouchedStatus(status: String)
-    func showPlayerWon(player: String)
+    func showPlayerWon(player: Int)
 }
 
 class Game {
@@ -23,7 +23,7 @@ class Game {
     }
     
     private var currentPlayer1: Bool = false // start out with p1
-    
+    private var _winner: Int = 0 // nobody has won to start out with
     
     
     init() {
@@ -36,17 +36,17 @@ class Game {
     ///
     private func placeShips() {
         // List of Ships
-        let ships = [5, 4, 3, 3, 2]
+        let ships = [1, 1]
         
         var allShipsPlaced = 0
         
         var currentShipIndex = 0
         var currentShip = ships[currentShipIndex]
         
-        while allShipsPlaced < 5 {
+        while allShipsPlaced < 2 {
             if (placeShip(shipLength: currentShip)) {
                 //NSLog("Ship \(currentShip) placed")
-                if (currentShipIndex < 4) {
+                if (currentShipIndex < 1) {
                     currentShipIndex = currentShipIndex + 1
                     currentShip = ships[currentShipIndex]
                 }
@@ -63,10 +63,10 @@ class Game {
         currentShipIndex = 0
         currentShip = ships[currentShipIndex]
         
-        while allShipsPlaced < 5 {
+        while allShipsPlaced < 2 {
             if (placeShip2(shipLength: currentShip)) {
                 //NSLog("P2 Ship \(currentShip) placed")
-                if (currentShipIndex < 4) {
+                if (currentShipIndex < 1) {
                     currentShipIndex = currentShipIndex + 1
                     currentShip = ships[currentShipIndex]
                 }
@@ -269,6 +269,9 @@ class Game {
     public var currentPlayerIs1: Bool {
         return currentPlayer1
     }
+    public var winner: Int {
+        return _winner
+    }
     
     public var p1Grid: [[Ships]] {
         return _p1Grid
@@ -308,9 +311,11 @@ class Game {
     }
     
     
+    
     /// Return 1 if p1 wins, 
     /// 2 if p2 wins
     public func checkForWinner() {
+        // Check if p1 has hit every ship
         var p1count = 0
         for coord: (row: Int, col: Int) in p1ShipCoords {
             if _p1Grid[coord.row][coord.col] == .hit {
@@ -318,12 +323,15 @@ class Game {
             }
         }
         
+        // announce if p1 has won
         if p1count == 2 {
             for delegate: GameModelDelegate in delegates {
-                delegate.showPlayerWon(player: "Player 1 Won!")
+                delegate.showPlayerWon(player: 1)
+                _winner = 1
             }
         }
         
+        // Check if p2 has hit every ship
         var p2count = 0
         for coord: (row: Int, col: Int) in p2ShipCoords {
             if _p2Grid[coord.row][coord.col] == .hit {
@@ -331,46 +339,47 @@ class Game {
             }
         }
         
+        // announce if p2 has won
         if p2count == 2 {
             for delegate: GameModelDelegate in delegates {
-                delegate.showPlayerWon(player: "Player 2 Won!")
+                delegate.showPlayerWon(player: 2)
+                _winner = 2
             }
         }
     }
     
     public func takeMove(row:Int, col: Int) {
+        var msg: String = ""
         if (currentPlayer1) {
             if (_p2Grid[row][col] == .none) {
                 _p2Grid[row][col] = .miss
-                for delegate: GameModelDelegate in delegates {
-                    delegate.showTouchedStatus(status: "Miss!")
-                }
+                msg = "Miss!"
             }
             else if (_p2Grid[row][col] == .ship)
             {
                 _p2Grid[row][col] = .hit
-                for delegate: GameModelDelegate in delegates {
-                    delegate.showTouchedStatus(status: "Hit!")
-                }
+                msg = "Hit!"
             }
         }
         else {
             if (_p1Grid[row][col] == .none) {
                 _p1Grid[row][col] = .miss
-                for delegate: GameModelDelegate in delegates {
-                    delegate.showTouchedStatus(status: "Miss!")
-                }
+                msg = "Miss!"
             }
             else if (_p1Grid[row][col] == .ship)
             {
                 _p1Grid[row][col] = .hit
-                for delegate: GameModelDelegate in delegates {
-                    delegate.showTouchedStatus(status: "Hit!")
-                }
+                msg = "Hit!"
             }
         }
         currentPlayer1 = !currentPlayer1
         checkForWinner()
+        
+        if (_winner == 0) {
+            for delegate: GameModelDelegate in delegates {
+                delegate.showTouchedStatus(status: msg)
+            }
+        }
     }
     
     public var delegates: [GameModelDelegate] = []

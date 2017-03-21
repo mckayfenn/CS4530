@@ -36,15 +36,15 @@ class GameViewController: UIViewController, GameViewDelegate, GameModelDelegate 
         view = GameView()
         self.edgesForExtendedLayout = []
         gameView.delegate = self
-        _game?.delegates.append(self)
+        //_game?.delegates.append(self)
     }
     
     override func viewDidLoad() {
         view.backgroundColor = UIColor.white
         
         gameView.delegate = self
-        _game?.delegates.append(self)
-
+        //_game?.delegates.append(self)
+        
         dontAllowMultipleTouches()
         
         refresh()
@@ -70,19 +70,20 @@ class GameViewController: UIViewController, GameViewDelegate, GameModelDelegate 
     }
     
     func tochedInRect(row: Int, col: Int) {
-        // Only allow a single selection per turn.
-        if (!multipleTouches) {
-            //NSLog("take move in row:\(row), col:\(col)")
-            _game?.takeMove(row: row, col: col)
-        
-            _ = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(showChangeScreen), userInfo: nil, repeats: false)
-            
-            // TODO: Make this change in response to the game actually changing
-            
-            refresh()
+        // Only allow a single selection per turn and only if the game hasn't been won
+        if (game?.winner == 0) {
+            if (!multipleTouches) {
+                //NSLog("take move in row:\(row), col:\(col)")
+                _game?.takeMove(row: row, col: col)
+                
+                _ = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(showChangeScreen), userInfo: nil, repeats: false)
+                
+                // TODO: Make this change in response to the game actually changing
+                
+                refresh()
+            }
+            multipleTouches = true
         }
-        multipleTouches = true
-        
     }
     
     
@@ -147,6 +148,7 @@ class GameViewController: UIViewController, GameViewDelegate, GameModelDelegate 
     }
     
     private var multipleTouches = false
+    private var gameWon = false
     
     func dontAllowMultipleTouches() {
         multipleTouches = false
@@ -155,24 +157,36 @@ class GameViewController: UIViewController, GameViewDelegate, GameModelDelegate 
     private var alert: UIAlertController!
     
     func showTouchedStatus(status: String) {
-        //alert = UIAlertController(title: status, message: nil, preferredStyle: UIAlertControllerStyle.alert)
+        alert = UIAlertController(title: status, message: nil, preferredStyle: UIAlertControllerStyle.alert)
         
-        //self.present(alert, animated: true, completion: nil)
+        self.present(alert, animated: true, completion: nil)
         
-        //_ = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(dismissAlert), userInfo: nil, repeats: false)
+        _ = Timer.scheduledTimer(timeInterval: 0.75, target: self, selector: #selector(dismissAlert), userInfo: nil, repeats: false)
         
-        //_ = Timer.scheduledTimer(timeInterval: 0.25, target: self, selector: #selector(showChangeScreen), userInfo: nil, repeats: false)
-
+        //_ = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(showChangeScreen), userInfo: nil, repeats: false)
+        
     }
     
-    func showPlayerWon(player: String) {
-        //alert = UIAlertController(title: player, message: nil, preferredStyle: UIAlertControllerStyle.alert)
+    func showPlayerWon(player: Int) {
+        gameWon = true
+        var msg = ""
+        if player == 1 {
+            msg = "Player 1 Won!"
+        }
+        else {
+            msg = "Player 2 Won!"
+        }
+        alert = UIAlertController(title: msg, message: nil, preferredStyle: UIAlertControllerStyle.alert)
         
-        //self.present(alert, animated: true, completion: nil)
+        self.present(alert, animated: true, completion: nil)
+        
+        _ = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(dismissAlert), userInfo: nil, repeats: false)
+        
+        
     }
     
     func dismissAlert() {
-        self.alert.dismiss(animated: true, completion: nil)
+        alert.dismiss(animated: true, completion: nil)
     }
     
     func showChangeScreen() {

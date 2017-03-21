@@ -39,7 +39,23 @@ class GameListViewController: UIViewController, UITableViewDataSource, UITableVi
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: UITableViewCell = UITableViewCell()
-        cell.textLabel?.text = _gameList.gameWithIndex(gameIndex: indexPath.row).currentPlayerIs1 ? "Player 2's turn" : "Player 1's turn"
+        
+        var labelText: String = ""
+        
+        if _gameList.gameWithIndex(gameIndex: indexPath.row).winner == 1 {
+            labelText = "Player 1 Won!"
+        }
+        else if _gameList.gameWithIndex(gameIndex: indexPath.row).winner == 2 {
+            labelText = "Player 2 Won!"
+        }
+        else if _gameList.gameWithIndex(gameIndex: indexPath.row).currentPlayerIs1 {
+            labelText = "Player 2's turn"
+        }
+        else if !_gameList.gameWithIndex(gameIndex: indexPath.row).currentPlayerIs1 {
+            labelText = "Player 1's turn"
+        }
+        
+        cell.textLabel?.text = labelText
         cell.detailTextLabel?.text = "This is a detail label"
         cell.detailTextLabel?.textColor = UIColor.blue
         cell.backgroundColor = UIColor.white
@@ -65,6 +81,10 @@ class GameListViewController: UIViewController, UITableViewDataSource, UITableVi
         // TODO: save the game here
         //_gameList.save()
         NSLog("GameListViewController says to save the game")
+    }
+    
+    func gameWon(player: Int) {
+        // maybe do something here
     }
     
     

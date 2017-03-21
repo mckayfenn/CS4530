@@ -23,16 +23,16 @@ class GameView: UIView {
         // draw enemy players rect
         var enemyShipsRect: CGRect = CGRect.zero
         let dimension: CGFloat = min(bounds.width, bounds.height)
-        enemyShipsRect.size.width = dimension
-        enemyShipsRect.size.height = dimension
+        enemyShipsRect.size.width = dimension - 40
+        enemyShipsRect.size.height = dimension - 40
         
         if (bounds.width < bounds.height) { // portrait
-            enemyShipsRect.origin.x = 0
+            enemyShipsRect.origin.x = 20
             enemyShipsRect.origin.y = enemyShipsRect.height - enemyShipsRect.height / 4
         }
         else { // landscape
             enemyShipsRect.origin.x = enemyShipsRect.width * 0.5 + enemyShipsRect.width / 4
-            enemyShipsRect.origin.y = 0
+            enemyShipsRect.origin.y = 20
         }
         
         
@@ -50,11 +50,11 @@ class GameView: UIView {
         
         if (bounds.width < bounds.height) { // portrait
             myShipsRect.origin.x = myShipsRect.width / 2
-            myShipsRect.origin.y = myShipsRect.height / 3
+            myShipsRect.origin.y = myShipsRect.height / 3 - 20
         }
         else { // landscape
             myShipsRect.origin.x = myShipsRect.width / 3
-            myShipsRect.origin.y = myShipsRect.height / 2
+            myShipsRect.origin.y = myShipsRect.height / 2 - 20
         }
         
         context.addRect(myShipsRect)
