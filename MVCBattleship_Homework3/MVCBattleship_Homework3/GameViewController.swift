@@ -74,21 +74,27 @@ class GameViewController: UIViewController, GameViewDelegate, GameModelDelegate 
         if (game?.winner == 0) {
             if (!multipleTouches) {
                 //NSLog("take move in row:\(row), col:\(col)")
+
                 _game?.takeMove(row: row, col: col)
                 
-                _ = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(showChangeScreen), userInfo: nil, repeats: false)
                 
+                // If they selected an already selected place, don't switch views
+                if (!tryAgain) {
+                    _ = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(showChangeScreen), userInfo: nil, repeats: false)
+                }
                 // TODO: Make this change in response to the game actually changing
                 
                 refresh()
+                
             }
-            multipleTouches = true
+            //multipleTouches = true
         }
     }
     
     
     private var p1Tokens: [String] = []
     private var p2Tokens: [String] = []
+    
     func refresh() {
         p1Tokens = []
         //var p1Tokens: [String] = []
@@ -122,29 +128,33 @@ class GameViewController: UIViewController, GameViewDelegate, GameModelDelegate 
         
         
         //view.setNeedsDisplay()
-        if (_game?.currentPlayerIs1)! {
-            gameView.p1Grid = p1Tokens
-            gameView.p2Grid = p2Tokens
+        if (!tryAgain) {
+            if (_game?.currentPlayerIs1)! {
+                gameView.p1Grid = p1Tokens
+                gameView.p2Grid = p2Tokens
+            }
+            else {
+                gameView.p1Grid = p2Tokens
+                gameView.p2Grid = p1Tokens
+            }
+            gameView.setNeedsDisplay()
         }
-        else {
-            gameView.p1Grid = p2Tokens
-            gameView.p2Grid = p1Tokens
-        }
-        gameView.setNeedsDisplay()
         
     }
     
     func switchGrids() {
-        NSLog("switch grids")
-        if (_game?.currentPlayerIs1)! {
-            gameView.p1Grid = p2Tokens
-            gameView.p2Grid = p1Tokens
+        if (!tryAgain) {
+            NSLog("switch grids")
+            if (_game?.currentPlayerIs1)! {
+                gameView.p1Grid = p2Tokens
+                gameView.p2Grid = p1Tokens
+            }
+            else {
+                gameView.p1Grid = p1Tokens
+                gameView.p2Grid = p2Tokens
+            }
+            gameView.setNeedsDisplay()
         }
-        else {
-            gameView.p1Grid = p1Tokens
-            gameView.p2Grid = p2Tokens
-        }
-        gameView.setNeedsDisplay()
     }
     
     private var multipleTouches = false
@@ -154,17 +164,31 @@ class GameViewController: UIViewController, GameViewDelegate, GameModelDelegate 
         multipleTouches = false
     }
     
+    private var tryAgain: Bool = false
+    
     private var alert: UIAlertController!
     
     func showTouchedStatus(status: String) {
-        alert = UIAlertController(title: status, message: nil, preferredStyle: UIAlertControllerStyle.alert)
         
-        self.present(alert, animated: true, completion: nil)
-        
-        _ = Timer.scheduledTimer(timeInterval: 0.75, target: self, selector: #selector(dismissAlert), userInfo: nil, repeats: false)
-        
-        //_ = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(showChangeScreen), userInfo: nil, repeats: false)
-        
+        if (status == "try again") {
+            tryAgain = true
+            
+            
+        }
+        else {
+            tryAgain = false
+            
+            multipleTouches = true
+            
+            alert = UIAlertController(title: status, message: nil, preferredStyle: UIAlertControllerStyle.alert)
+            
+            self.present(alert, animated: true, completion: nil)
+            
+            _ = Timer.scheduledTimer(timeInterval: 0.75, target: self, selector: #selector(dismissAlert), userInfo: nil, repeats: false)
+            
+            //_ = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(showChangeScreen), userInfo: nil, repeats: false)
+            
+        }
     }
     
     func showPlayerWon(player: Int) {

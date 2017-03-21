@@ -189,17 +189,6 @@ class GameView: UIView {
     
     
     
-    func update() {
-        //present view controller
-        NSLog("show view controller")
-        
-        setNeedsDisplay()
-        
-    }
-    
-    
-    
-    
     
     weak var delegate: GameViewDelegate? = nil
     

@@ -17,6 +17,7 @@ class GameListViewController: UIViewController, UITableViewDataSource, UITableVi
     override func loadView() {
         let gameTableView: UITableView = UITableView()
         view = gameTableView
+        _gameList.load()
     }
     
     override func viewDidLoad() {
@@ -30,6 +31,8 @@ class GameListViewController: UIViewController, UITableViewDataSource, UITableVi
         _gameListView.delegate = self
     }
     override func viewWillAppear(_ animated: Bool) {
+        // load games from file
+        //_gameList.load()
         _gameListView.reloadData()
     }
     
@@ -56,6 +59,8 @@ class GameListViewController: UIViewController, UITableViewDataSource, UITableVi
         }
         
         cell.textLabel?.text = labelText
+        //let p1ShipsSunk = !_gameList.gameWithIndex(gameIndex: indexPath.row).p1ShipsSunk
+        //let p2ShipsSunk = !_gameList.gameWithIndex(gameIndex: indexPath.row).p2ShipsSunk
         cell.detailTextLabel?.text = "This is a detail label"
         cell.detailTextLabel?.textColor = UIColor.blue
         cell.backgroundColor = UIColor.white
@@ -79,7 +84,7 @@ class GameListViewController: UIViewController, UITableViewDataSource, UITableVi
     
     func boardChanged() {
         // TODO: save the game here
-        //_gameList.save()
+        _gameList.save()
         NSLog("GameListViewController says to save the game")
     }
     
