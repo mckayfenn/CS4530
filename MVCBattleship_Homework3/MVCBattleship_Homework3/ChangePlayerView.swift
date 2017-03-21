@@ -20,15 +20,12 @@ class ChangePlayerView: UIViewController {
         
     }
     
-
-    
-    
     
     override func viewDidLoad() {
         labelView.textAlignment = NSTextAlignment.center
-        labelView.font = UIFont.systemFont(ofSize: 10.0)
+        labelView.font = UIFont.systemFont(ofSize: 15.0)
         
-        labelView.text = "Pass the controller to your opponent"
+        labelView.text = "Pass the device to your opponent."
         labelView.backgroundColor = UIColor.white
     }
 }

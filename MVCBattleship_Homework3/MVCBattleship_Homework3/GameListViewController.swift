@@ -40,6 +40,8 @@ class GameListViewController: UIViewController, UITableViewDataSource, UITableVi
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: UITableViewCell = UITableViewCell()
         cell.textLabel?.text = _gameList.gameWithIndex(gameIndex: indexPath.row).currentPlayerIs1 ? "Player 2's turn" : "Player 1's turn"
+        cell.detailTextLabel?.text = "This is a detail label"
+        cell.detailTextLabel?.textColor = UIColor.blue
         cell.backgroundColor = UIColor.white
         
         return cell
@@ -55,7 +57,14 @@ class GameListViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func list(list: GameList) {
+        NSLog("When is this called?")
         _gameListView.reloadData()
+    }
+    
+    func boardChanged() {
+        // TODO: save the game here
+        //_gameList.save()
+        NSLog("GameListViewController says to save the game")
     }
     
     

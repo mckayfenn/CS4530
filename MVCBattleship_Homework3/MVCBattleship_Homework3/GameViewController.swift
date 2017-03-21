@@ -76,7 +76,7 @@ class GameViewController: UIViewController, GameViewDelegate, GameModelDelegate 
             _game?.takeMove(row: row, col: col)
         
             _ = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(showChangeScreen), userInfo: nil, repeats: false)
-        
+            
             // TODO: Make this change in response to the game actually changing
             
             refresh()
@@ -160,8 +160,17 @@ class GameViewController: UIViewController, GameViewDelegate, GameModelDelegate 
         //self.present(alert, animated: true, completion: nil)
         
         //_ = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(dismissAlert), userInfo: nil, repeats: false)
+        
+        //_ = Timer.scheduledTimer(timeInterval: 0.25, target: self, selector: #selector(showChangeScreen), userInfo: nil, repeats: false)
 
     }
+    
+    func showPlayerWon(player: String) {
+        //alert = UIAlertController(title: player, message: nil, preferredStyle: UIAlertControllerStyle.alert)
+        
+        //self.present(alert, animated: true, completion: nil)
+    }
+    
     func dismissAlert() {
         self.alert.dismiss(animated: true, completion: nil)
     }

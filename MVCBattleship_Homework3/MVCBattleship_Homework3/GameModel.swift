@@ -10,6 +10,7 @@ import Foundation
 
 protocol GameModelDelegate: class {
     func showTouchedStatus(status: String)
+    func showPlayerWon(player: String)
 }
 
 class Game {
@@ -44,7 +45,7 @@ class Game {
         
         while allShipsPlaced < 5 {
             if (placeShip(shipLength: currentShip)) {
-                NSLog("Ship \(currentShip) placed")
+                //NSLog("Ship \(currentShip) placed")
                 if (currentShipIndex < 4) {
                     currentShipIndex = currentShipIndex + 1
                     currentShip = ships[currentShipIndex]
@@ -57,14 +58,14 @@ class Game {
         
         
         // Now do it again for grid2
-
+        
         allShipsPlaced = 0
         currentShipIndex = 0
         currentShip = ships[currentShipIndex]
         
         while allShipsPlaced < 5 {
             if (placeShip2(shipLength: currentShip)) {
-                NSLog("P2 Ship \(currentShip) placed")
+                //NSLog("P2 Ship \(currentShip) placed")
                 if (currentShipIndex < 4) {
                     currentShipIndex = currentShipIndex + 1
                     currentShip = ships[currentShipIndex]
@@ -72,7 +73,7 @@ class Game {
                 allShipsPlaced = allShipsPlaced + 1
             }
         }
-       
+        
     }
     
     
@@ -99,9 +100,9 @@ class Game {
                 }
                 
                 // If all positions were valid then place the ship
-//                if (length == shipLength - 1 && validPlace) {
-//                    setShip(grid: 1, ship: shipLength, randY: randY, randX: randX, orientation: orientation)
-//                }
+                //                if (length == shipLength - 1 && validPlace) {
+                //                    setShip(grid: 1, ship: shipLength, randY: randY, randX: randX, orientation: orientation)
+                //                }
                 
                 xPos = xPos + 1
             }
@@ -123,9 +124,9 @@ class Game {
                 }
                 
                 // If all positions were valid then place the ship
-//                if (length == shipLength - 1 && validPlace) {
-//                    setShip(grid: 1, ship: shipLength, randY: randY, randX: randX, orientation: orientation)
-//                }
+                //                if (length == shipLength - 1 && validPlace) {
+                //                    setShip(grid: 1, ship: shipLength, randY: randY, randX: randX, orientation: orientation)
+                //                }
                 
                 yPos = yPos + 1
             }
@@ -157,14 +158,14 @@ class Game {
                 }
                 
                 // If all positions were valid then place the ship
-//                if (length == shipLength - 1 && validPlace) {
-//                    setShip(grid: 2, ship: shipLength, randY: randY, randX: randX, orientation: orientation)
-//                }
+                //                if (length == shipLength - 1 && validPlace) {
+                //                    setShip(grid: 2, ship: shipLength, randY: randY, randX: randX, orientation: orientation)
+                //                }
                 
                 xPos = xPos + 1
             }
             setShip(grid: 2, ship: shipLength, randY: randY, randX: randX, orientation: orientation)
-
+            
         }
         else { // Vertical
             var yPos = randY
@@ -179,9 +180,9 @@ class Game {
                 }
                 
                 // If all positions were valid then place the ship
-//                if (length == shipLength - 1 && validPlace) {
-//                    setShip(grid: 2, ship: shipLength, randY: randY, randX: randX, orientation: orientation)
-//                }
+                //                if (length == shipLength - 1 && validPlace) {
+                //                    setShip(grid: 2, ship: shipLength, randY: randY, randX: randX, orientation: orientation)
+                //                }
                 
                 yPos = yPos + 1
             }
@@ -190,6 +191,9 @@ class Game {
         
         return validPlace
     }
+    
+    private var p1ShipCoords: [(row: Int, col:Int)] = []
+    private var p2ShipCoords: [(row: Int, col:Int)] = []
     
     private func setShip(grid: Int, ship:Int, randY: Int, randX: Int, orientation: Int) {
         var xPos = 0
@@ -207,9 +211,11 @@ class Game {
             if (orientation == 0) {
                 if (grid == 1) {
                     _p1Grid[randY][xPos] = .ship
+                    p1ShipCoords.append((row: randY, col: xPos))
                 }
                 else {
                     _p2Grid[randY][xPos] = .ship
+                    p2ShipCoords.append((row: randY, col: xPos))
                 }
                 
                 xPos = xPos + 1
@@ -218,9 +224,11 @@ class Game {
                 
                 if (grid == 1) {
                     _p1Grid[yPos][randX] = .ship
+                    p1ShipCoords.append((row: yPos, col: randX))
                 }
                 else {
                     _p2Grid[yPos][randX] = .ship
+                    p2ShipCoords.append((row: yPos, col: randX))
                 }
                 
                 yPos = yPos + 1
@@ -270,6 +278,66 @@ class Game {
         return _p2Grid
     }
     
+    public var dictionaryRepresentation: NSDictionary {
+        return ["Grid":"TestingData"]
+    }
+    
+    public init(dictionary: NSDictionary) {
+        // load games
+        let tokenStrings: NSArray = dictionary.object(forKey: "Board") as! NSArray
+        _p1Grid[0][0] = tokenFromString(tokenStrings.object(at: 0) as! String)
+    }
+    
+    private func stringFromToken(_ token: Ships) -> String {
+        switch (token) {
+        case .none : return "none"
+        case .miss : return "miss"
+        case .hit : return "hit"
+        case .ship : return "ship"
+        }
+    }
+    
+    private func tokenFromString(_ tokenString: String) -> Ships {
+        switch (tokenString) {
+        case "none" : return .none
+        case "miss" : return .miss
+        case "hit" : return .hit
+        case "ship" : return .ship
+        default : return .none
+        }
+    }
+    
+    
+    /// Return 1 if p1 wins, 
+    /// 2 if p2 wins
+    public func checkForWinner() {
+        var p1count = 0
+        for coord: (row: Int, col: Int) in p1ShipCoords {
+            if _p1Grid[coord.row][coord.col] == .hit {
+                p1count = p1count + 1
+            }
+        }
+        
+        if p1count == 2 {
+            for delegate: GameModelDelegate in delegates {
+                delegate.showPlayerWon(player: "Player 1 Won!")
+            }
+        }
+        
+        var p2count = 0
+        for coord: (row: Int, col: Int) in p2ShipCoords {
+            if _p2Grid[coord.row][coord.col] == .hit {
+                p2count = p2count + 1
+            }
+        }
+        
+        if p2count == 2 {
+            for delegate: GameModelDelegate in delegates {
+                delegate.showPlayerWon(player: "Player 2 Won!")
+            }
+        }
+    }
+    
     public func takeMove(row:Int, col: Int) {
         if (currentPlayer1) {
             if (_p2Grid[row][col] == .none) {
@@ -302,6 +370,7 @@ class Game {
             }
         }
         currentPlayer1 = !currentPlayer1
+        checkForWinner()
     }
     
     public var delegates: [GameModelDelegate] = []
