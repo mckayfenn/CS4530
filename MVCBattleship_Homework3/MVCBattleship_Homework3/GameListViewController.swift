@@ -50,8 +50,6 @@ class GameListViewController: UIViewController, UITableViewDataSource, UITableVi
         let game: Game = _gameList.gameWithIndex(gameIndex: gameIndex)
         
         let gameDetailViewController: GameViewController = GameViewController(game: game)
-        gameDetailViewController.gameList = _gameList
-        gameDetailViewController.gameIndex = gameIndex
         
         navigationController?.pushViewController(gameDetailViewController, animated: true)
     }

@@ -9,18 +9,13 @@
 import UIKit
 
 class GameViewController: UIViewController, GameViewDelegate, GameModelDelegate {
-    private var _gameList: GameList? = nil
-    private var _gameIndex: Int? = nil
     
-    private var _game: Game
+    private var _game: Game? = nil
     
-    var gameList: GameList? {
-        get { return _gameList }
-        set { _gameList = newValue }
-    }
-    var gameIndex: Int? {
-        get { return _gameIndex }
-        set { _gameIndex = newValue }
+    
+    var game: Game? {
+        get { return _game }
+        set { _game = newValue }
     }
     
     var gameView: GameView {
@@ -30,7 +25,7 @@ class GameViewController: UIViewController, GameViewDelegate, GameModelDelegate 
     init (game: Game) {
         _game = game
         super.init(nibName: nil, bundle: nil)
-        _game.delegates.append(self)
+        _game?.delegates.append(self)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -41,14 +36,14 @@ class GameViewController: UIViewController, GameViewDelegate, GameModelDelegate 
         view = GameView()
         self.edgesForExtendedLayout = []
         gameView.delegate = self
-        _game.delegates.append(self)
+        _game?.delegates.append(self)
     }
     
     override func viewDidLoad() {
         view.backgroundColor = UIColor.white
         
         gameView.delegate = self
-        _game.delegates.append(self)
+        _game?.delegates.append(self)
 
         dontAllowMultipleTouches()
         
@@ -58,12 +53,10 @@ class GameViewController: UIViewController, GameViewDelegate, GameModelDelegate 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
-        if(_gameList == nil || _gameIndex == nil) {
-            return
-        }
         
-        let game: Game = (_gameList?.gameWithIndex(gameIndex: gameIndex!))!
-        gameView.game = game
+        
+        //let game: Game = (_gameList?.gameWithIndex(gameIndex: gameIndex!))!
+        gameView.game = game!
         
         dontAllowMultipleTouches()
         
@@ -72,7 +65,7 @@ class GameViewController: UIViewController, GameViewDelegate, GameModelDelegate 
     
     func deleteGameSelected() {
         NSLog("delete game selected")
-        _gameList?.deleteGameIndex(gameIndex: gameIndex!)
+        //_game?.deleteGameIndex(gameIndex: gameIndex!)
         _ = navigationController?.popViewController(animated: true)
     }
     
@@ -80,7 +73,7 @@ class GameViewController: UIViewController, GameViewDelegate, GameModelDelegate 
         // Only allow a single selection per turn.
         if (!multipleTouches) {
             //NSLog("take move in row:\(row), col:\(col)")
-            _gameList?.gameWithIndex(gameIndex: gameIndex!).takeMove(row: row, col: col)
+            _game?.takeMove(row: row, col: col)
         
             _ = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(showChangeScreen), userInfo: nil, repeats: false)
         
@@ -98,9 +91,9 @@ class GameViewController: UIViewController, GameViewDelegate, GameModelDelegate 
     func refresh() {
         p1Tokens = []
         //var p1Tokens: [String] = []
-        for boardRow: Int in 0 ..< (_gameList?.gameWithIndex(gameIndex: gameIndex!).p1Grid.count)! {
-            for boardCol: Int in 0 ..< (_gameList?.gameWithIndex(gameIndex: gameIndex!).p1Grid.count)! {
-                let token: Game.Ships = (_gameList?.gameWithIndex(gameIndex: gameIndex!).p1Grid[boardRow][boardCol])!
+        for boardRow: Int in 0 ..< (_game?.p1Grid.count)! {
+            for boardCol: Int in 0 ..< (_game?.p1Grid.count)! {
+                let token: Game.Ships = (_game?.p1Grid[boardRow][boardCol])!
                 switch token {
                 case .none : p1Tokens.append("none")
                 case .miss : p1Tokens.append("miss")
@@ -112,9 +105,9 @@ class GameViewController: UIViewController, GameViewDelegate, GameModelDelegate 
         
         p2Tokens = []
         //var p2Tokens: [String] = []
-        for boardRow: Int in 0 ..< (_gameList?.gameWithIndex(gameIndex: gameIndex!).p2Grid.count)! {
-            for boardCol: Int in 0 ..< (_gameList?.gameWithIndex(gameIndex: gameIndex!).p2Grid.count)! {
-                let token: Game.Ships = (_gameList?.gameWithIndex(gameIndex: gameIndex!).p2Grid[boardRow][boardCol])!
+        for boardRow: Int in 0 ..< (_game?.p2Grid.count)! {
+            for boardCol: Int in 0 ..< (_game?.p2Grid.count)! {
+                let token: Game.Ships = (_game?.p2Grid[boardRow][boardCol])!
                 switch token {
                 case .none : p2Tokens.append("none")
                 case .miss : p2Tokens.append("miss")
@@ -128,7 +121,7 @@ class GameViewController: UIViewController, GameViewDelegate, GameModelDelegate 
         
         
         //view.setNeedsDisplay()
-        if (_gameList?.gameWithIndex(gameIndex: gameIndex!).currentPlayerIs1)! {
+        if (_game?.currentPlayerIs1)! {
             gameView.p1Grid = p1Tokens
             gameView.p2Grid = p2Tokens
         }
@@ -142,7 +135,7 @@ class GameViewController: UIViewController, GameViewDelegate, GameModelDelegate 
     
     func switchGrids() {
         NSLog("switch grids")
-        if (_gameList?.gameWithIndex(gameIndex: gameIndex!).currentPlayerIs1)! {
+        if (_game?.currentPlayerIs1)! {
             gameView.p1Grid = p2Tokens
             gameView.p2Grid = p1Tokens
         }
