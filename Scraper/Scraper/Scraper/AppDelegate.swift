@@ -16,21 +16,60 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        let url: URL = URL(string: "http://www.nytimes.com")!
-        var content: String = try! NSString(contentsOf: url, encoding: String.Encoding.utf8.rawValue)
-        //NSLog("Received response data: \(content)")
+        let networkQueue: OperationQueue = OperationQueue()
         
-        let imageTagStart: Range = content.range(of: "<img src=\"")
-        if imageTagStart.location != NSNotFound {
-            content = content.substring(from: imageTagStart.location + imageTagStart.length)
-            NSLog("imageTag: \(imageTag)")
+        networkQueue.addOperation({
+        
+        
+            let url: URL = URL(string: "http://www.nytimes.com")!
+            var content: NSString = try! NSString(contentsOf: url, encoding: String.Encoding.utf8.rawValue) // this is very slow, needs to be on a thread
+            //NSLog("Received response data: \(content)")
             
-            let imageTagEnd: Range = imageTag.range(of: "\"")
-            if imageTagEnd.location != NSNotFound {
-                let imageURLString: String = content.substring(to: imageTagEnd.location)
-                NSLog("Found Image URL: \(imageURLString)")
+            var imageUrls: [URL] = []
+            while (content.length > 0) {
+                
+                let imageTagStart: NSRange = content.range(of: "<img src=\"")
+                if imageTagStart.location == NSNotFound {
+                    content = ""
+                }
+                else {
+                    content = content.substring(from: imageTagStart.location + imageTagStart.length) as NSString
+                    
+                    let imageTagEnd: NSRange = content.range(of: "\"")
+                    if imageTagEnd.location != NSNotFound {
+                        let imageURLString: String = content.substring(to: imageTagEnd.location)
+                        let imageURL: URL? = URL(string: imageURLString)
+                        if imageURL != nil {
+                            NSLog("Found Image URL: \(imageURLString)")
+                            imageUrls.append(imageURL!)
+                        }
+                    }
+                }
+                
+                
             }
-        }
+            
+            NSLog("Found \(imageUrls.count) Image URLS")
+            
+            for imageUrl: URL in imageUrls {
+                
+                let imageData: NSData? = NSData(contentsOf: imageUrl)  // this is very slow needs to be on a thread
+                if imageData != nil {
+                    NSLog("Downloaded data of size: \(imageData?.length)")
+                    let image: UIImage! = UIImage(data: imageData as! Data)
+                    if image != nil {
+                        NSLog("Downloaded image of size: [\(image.size.width)x\(image.size.height)]")
+                    }
+                    
+                }
+            }
+        
+        
+        })
+        
+        
+        
+        
         
         return true
     }
