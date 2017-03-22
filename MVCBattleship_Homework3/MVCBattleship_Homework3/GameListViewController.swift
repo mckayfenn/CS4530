@@ -41,7 +41,15 @@ class GameListViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: UITableViewCell = UITableViewCell()
+        //let cell: UITableViewCell = UITableViewCell()
+        
+        let cell: UITableViewCell = {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "UITableViewCell") else {
+                // Never fails:
+                return UITableViewCell(style: UITableViewCellStyle.value1, reuseIdentifier: "UITableViewCell")
+            }
+            return cell
+        }()
         
         var labelText: String = ""
         
@@ -59,9 +67,11 @@ class GameListViewController: UIViewController, UITableViewDataSource, UITableVi
         }
         
         cell.textLabel?.text = labelText
-        //let p1ShipsSunk = !_gameList.gameWithIndex(gameIndex: indexPath.row).p1ShipsSunk
-        //let p2ShipsSunk = !_gameList.gameWithIndex(gameIndex: indexPath.row).p2ShipsSunk
-        cell.detailTextLabel?.text = "This is a detail label"
+        let p1ShipsSunk = _gameList.gameWithIndex(gameIndex: indexPath.row).p1ShipsSunk
+        let p2ShipsSunk = _gameList.gameWithIndex(gameIndex: indexPath.row).p2ShipsSunk
+        let detailLabel: String = "P1 sunk: \(p1ShipsSunk) ships.  P2 sunk: \(p2ShipsSunk) ships."
+        cell.detailTextLabel?.text = detailLabel
+        cell.detailTextLabel?.font = cell.detailTextLabel?.font.withSize(9)
         cell.detailTextLabel?.textColor = UIColor.blue
         cell.backgroundColor = UIColor.white
         
@@ -90,6 +100,7 @@ class GameListViewController: UIViewController, UITableViewDataSource, UITableVi
     
     func gameWon(player: Int) {
         // maybe do something here
+        _gameList.save()
     }
     
     

@@ -36,17 +36,17 @@ class Game {
     ///
     private func placeShips() {
         // List of Ships
-        let ships = [2, 1]
+        let ships = [5, 4, 3, 2]
         
         var allShipsPlaced = 0
         
         var currentShipIndex = 0
         var currentShip = ships[currentShipIndex]
         
-        while allShipsPlaced < 2 {
+        while allShipsPlaced < 4 {
             if (placeShip(shipLength: currentShip)) {
                 //NSLog("Ship \(currentShip) placed")
-                if (currentShipIndex < 1) {
+                if (currentShipIndex < 3) {
                     currentShipIndex = currentShipIndex + 1
                     currentShip = ships[currentShipIndex]
                 }
@@ -63,10 +63,10 @@ class Game {
         currentShipIndex = 0
         currentShip = ships[currentShipIndex]
         
-        while allShipsPlaced < 2 {
+        while allShipsPlaced < 4 {
             if (placeShip2(shipLength: currentShip)) {
                 //NSLog("P2 Ship \(currentShip) placed")
-                if (currentShipIndex < 1) {
+                if (currentShipIndex < 3) {
                     currentShipIndex = currentShipIndex + 1
                     currentShip = ships[currentShipIndex]
                 }
@@ -389,22 +389,149 @@ class Game {
         return _p2Grid
     }
     
+    /// For saving games
     public var dictionaryRepresentation: NSDictionary {
-        // for saving games
-        return ["Grid":[
-                        "\(stringFromToken(_p1Grid[0][0]))",
-                        "\(stringFromToken(_p1Grid[0][1]))",
-                        "\(stringFromToken(_p1Grid[0][2]))",
-                        "\(stringFromToken(_p1Grid[0][3]))",]]
+        // Save p1Grid
+        var result: [String : [String]] = [:]
+        var strings: [String] = []
+        for boardRow: Int in 0 ..< (_p1Grid.count) {
+            for boardCol: Int in 0 ..< (_p1Grid.count) {
+                strings.append(stringFromToken(_p1Grid[boardRow][boardCol]))
+            }
+        }
+        result["P1Grid"] = strings
+        
+        
+        // Save p2Grid
+        strings = []
+        for boardRow: Int in 0 ..< (_p2Grid.count) {
+            for boardCol: Int in 0 ..< (_p2Grid.count) {
+                strings.append(stringFromToken(_p2Grid[boardRow][boardCol]))
+            }
+        }
+        result["P2Grid"] = strings
+        
+        
+        // Save p1ShipCoordinates
+        strings = []
+        for (ship, coords) in p1ShipCoordsDict {
+            for coord in coords {
+                strings.append(String(coord.row))
+                strings.append(String(coord.col))
+            }
+        }
+        result["P1ShipCoords"] = strings
+        
+        
+        // Save p2ShipCoordinates
+        strings = []
+        for (ship, coords) in p2ShipCoordsDict {
+            for coord in coords {
+                strings.append(String(coord.row))
+                strings.append(String(coord.col))
+            }
+        }
+        result["P2ShipCoords"] = strings
+        
+        // Save currentPlayer
+        if (currentPlayer1) {
+            result["CurrentPlayer"] = ["2"]
+        }
+        else {
+            result["CurrentPlayer"] = ["1"]
+        }
+        
+        
+        // Save ships sunk
+        result["P1ShipsSunk"] = [String(p1ShipsSunk)]
+        result["P2ShipsSunk"] = [String(p2ShipsSunk)]
+        
+        
+        // Save winner
+        result["Winner"] = [String(_winner)]
+        
+        return result as NSDictionary
     }
     
+    /// For loading games
     public init(dictionary: NSDictionary) {
-        // for loading games
-        let tokenStrings: NSArray = dictionary.object(forKey: "Grid") as! NSArray
-        _p1Grid[0][0] = tokenFromString(tokenStrings.object(at: 0) as! String)
-        _p1Grid[0][1] = tokenFromString(tokenStrings.object(at: 1) as! String)
-        _p1Grid[0][2] = tokenFromString(tokenStrings.object(at: 2) as! String)
-        _p1Grid[0][3] = tokenFromString(tokenStrings.object(at: 3) as! String)
+        // load p1Grid
+        let tokens: [String] = dictionary.value(forKey: "P1Grid") as! [String]
+        var i = 0
+        for boardRow: Int in 0 ..< (_p1Grid.count) {
+            for boardCol: Int in 0 ..< (_p1Grid.count) {
+                _p1Grid[boardRow][boardCol] = tokenFromString(tokens[i])
+                i = i + 1
+            }
+        }
+        
+        
+        // load p2Grid
+        let tokens2: [String] = dictionary.value(forKey: "P2Grid") as! [String]
+        var j = 0
+        for boardRow: Int in 0 ..< (_p2Grid.count) {
+            for boardCol: Int in 0 ..< (_p2Grid.count) {
+                _p2Grid[boardRow][boardCol] = tokenFromString(tokens2[j])
+                j = j + 1
+            }
+        }
+        
+        
+        // load p1ShipCoords
+        let p1coords: [String] = dictionary.value(forKey: "P1ShipCoords") as! [String]
+        loadP1ShipCoords(coords: p1coords)
+        
+        // load p2ShipCoords
+        let p2coords: [String] = dictionary.value(forKey: "P2ShipCoords") as! [String]
+        loadP2ShipCoords(coords: p2coords)
+        
+        
+        // load currentPlayer
+        let tokens3: [String] = dictionary.value(forKey: "CurrentPlayer") as! [String]
+        let currPlayer = tokens3[0]
+        if (currPlayer == "1") {
+            currentPlayer1 = false
+        }
+        else {
+            currentPlayer1 = true
+        }
+        
+        
+        // load ships sunk
+        let p1sunk = dictionary.value(forKey: "P1ShipsSunk") as! [String]
+        p1ShipsSunk = Int(p1sunk[0])!
+        let p2sunk = dictionary.value(forKey: "P2ShipsSunk") as! [String]
+        p2ShipsSunk = Int(p2sunk[0])!
+        
+        
+        // load winner
+        let winn = dictionary.value(forKey: "Winner") as! [String]
+        _winner = Int(winn[0])!
+    }
+    
+    private func loadP1ShipCoords(coords: [String]) {
+        let listOfShips = [5, 4, 3, 2]
+        var i = 0
+        for ship in listOfShips {
+            var ship1Coords = [(row: Int, col: Int)]()
+            for length: Int in 0 ..< ship {
+                ship1Coords.append((row: Int(coords[i])!, col: Int(coords[i+1])!))
+                i = i + 2
+            }
+            p1ShipCoordsDict[ship] = ship1Coords
+        }
+    }
+    private func loadP2ShipCoords(coords: [String]) {
+        let listOfShips = [5, 4, 3, 2]
+        var i = 0
+        for ship in listOfShips {
+            var ship2Coords = [(row: Int, col: Int)]()
+            for length: Int in 0 ..< ship {
+                ship2Coords.append((row: Int(coords[i])!, col: Int(coords[i+1])!))
+                i = i + 2
+            }
+            p2ShipCoordsDict[ship] = ship2Coords
+        }
     }
     
     private func stringFromToken(_ token: Ships) -> String {
@@ -479,9 +606,9 @@ class Game {
         }
         
         // announce if p1 has won
-        if p1count == 3 {
+        if p1count == 14 {
             for delegate: GameModelDelegate in delegates {
-                delegate.showPlayerWon(player: 1)
+                //delegate.showPlayerWon(player: 1)
                 _winner = 1
             }
         }
@@ -497,9 +624,9 @@ class Game {
         }
         
         // announce if p2 has won
-        if p2count == 3 {
+        if p2count == 14 {
             for delegate: GameModelDelegate in delegates {
-                delegate.showPlayerWon(player: 2)
+                //delegate.showPlayerWon(player: 2)
                 _winner = 2
             }
         }
@@ -550,6 +677,11 @@ class Game {
         if (_winner == 0) {
             for delegate: GameModelDelegate in delegates {
                 delegate.showTouchedStatus(status: msg)
+            }
+        }
+        else {
+            for delegate: GameModelDelegate in delegates {
+                delegate.showPlayerWon(player: _winner)
             }
         }
     }
