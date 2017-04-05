@@ -12,6 +12,8 @@
 		0A4227F11E8C662A00BAAB3A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A4227F01E8C662A00BAAB3A /* Assets.xcassets */; };
 		0A4227FC1E8C6AC100BAAB3A /* vertex.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 0A4227FB1E8C6AC100BAAB3A /* vertex.glsl */; };
 		0A4227FE1E8C6B0300BAAB3A /* fragment.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 0A4227FD1E8C6B0300BAAB3A /* fragment.glsl */; };
+		0A4F1A011E95999B002D8513 /* mario.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A4F1A001E95999B002D8513 /* mario.png */; };
+		0A4F1A031E959CFD002D8513 /* Sprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4F1A021E959CFD002D8513 /* Sprite.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,8 @@
 		0A4227F51E8C662A00BAAB3A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0A4227FB1E8C6AC100BAAB3A /* vertex.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = vertex.glsl; sourceTree = "<group>"; };
 		0A4227FD1E8C6B0300BAAB3A /* fragment.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fragment.glsl; sourceTree = "<group>"; };
+		0A4F1A001E95999B002D8513 /* mario.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mario.png; sourceTree = "<group>"; };
+		0A4F1A021E959CFD002D8513 /* Sprite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sprite.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,8 +60,10 @@
 			children = (
 				0A4227E91E8C662A00BAAB3A /* AppDelegate.swift */,
 				0A4227EB1E8C662A00BAAB3A /* SpriteViewController.swift */,
+				0A4F1A021E959CFD002D8513 /* Sprite.swift */,
 				0A4227FB1E8C6AC100BAAB3A /* vertex.glsl */,
 				0A4227FD1E8C6B0300BAAB3A /* fragment.glsl */,
+				0A4F1A001E95999B002D8513 /* mario.png */,
 				0A4227F01E8C662A00BAAB3A /* Assets.xcassets */,
 				0A4227F51E8C662A00BAAB3A /* Info.plist */,
 			);
@@ -123,6 +129,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A4F1A011E95999B002D8513 /* mario.png in Resources */,
 				0A4227FE1E8C6B0300BAAB3A /* fragment.glsl in Resources */,
 				0A4227F11E8C662A00BAAB3A /* Assets.xcassets in Resources */,
 				0A4227FC1E8C6AC100BAAB3A /* vertex.glsl in Resources */,
@@ -137,6 +144,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A4227EC1E8C662A00BAAB3A /* SpriteViewController.swift in Sources */,
+				0A4F1A031E959CFD002D8513 /* Sprite.swift in Sources */,
 				0A4227EA1E8C662A00BAAB3A /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -280,6 +288,7 @@
 				0A4227FA1E8C662A00BAAB3A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
