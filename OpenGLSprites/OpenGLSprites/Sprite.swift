@@ -191,8 +191,12 @@ class Sprite {
         
         // Translation info
         glUniform2f(glGetUniformLocation(Sprite.program, "translate"), positionX, positionY)
-        //glUniform2f(glGetUniformLocation(program, "scale"), scaleX, scaleY)
-        //glUniform2f(glGetUniformLocation(program, "rotation"), rotationX, rotationY)
+        glUniform2f(glGetUniformLocation(Sprite.program, "scale"), scaleX, scaleY)
+        glUniform1f(glGetUniformLocation(Sprite.program, "rotation"), rotation)
+        
+        // for matrices
+        //glUniformMatrix4fv(<#T##location: GLint##GLint#>, <#T##count: GLsizei##GLsizei#>, <#T##transpose: GLboolean##GLboolean#>, <#T##value: UnsafePointer<GLfloat>!##UnsafePointer<GLfloat>!#>)
+        
         
         // bind the texture
         if let texture = texture {
